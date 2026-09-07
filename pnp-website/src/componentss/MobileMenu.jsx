@@ -1,10 +1,19 @@
 import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 /**
  * MobileMenu — accessible slide-down sheet.
  * Locks body scroll, restores focus on close, dismisses on Escape.
+ *
+ * `links` may be either:
+ *   - in-page anchor entries: { label, href }
+ *   - full routes: { label, to }
+ *
+ * `onHome` controls whether in-page anchors are used for matching labels.
  */
-export default function MobileMenu({ open, onClose, links, currentPath = "/" }) {
+export default function MobileMenu({ open, onClose, links, onHome = true }) {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     if (!open) return undefined;
     const previousOverflow = document.body.style.overflow;
@@ -21,6 +30,17 @@ export default function MobileMenu({ open, onClose, links, currentPath = "/" }) 
   }, [open, onClose]);
 
   if (!open) return null;
+
+  const isActive = (link) => {
+    if (link.to) {
+      return (
+        pathname === link.to ||
+        (link.to !== "/" && pathname.startsWith(link.to))
+      );
+    }
+    if (link.href && onHome) return false; // in-page anchors don't claim active state
+    return false;
+  };
 
   return (
     <div
@@ -60,29 +80,48 @@ export default function MobileMenu({ open, onClose, links, currentPath = "/" }) 
         <nav aria-label="Primary">
           <ul className="flex flex-col divide-y divide-[var(--pnp-charcoal)]/10">
             {links.map((l) => {
-              const isActive =
-                currentPath === l.href ||
-                (l.href !== "/" && currentPath.startsWith(l.href));
+              const active = isActive(l);
+              const linkClass = `flex items-center justify-between py-4 font-display text-2xl font-medium transition-colors ${
+                active
+                  ? "text-[var(--pnp-dark-teal)]"
+                  : "text-[var(--pnp-charcoal)] hover:text-[var(--pnp-teal)]"
+              }`;
+
+              const indicator = (
+                <span
+                  className={`h-px transition-all duration-200 ${
+                    active
+                      ? "w-10 bg-[var(--pnp-gold)]"
+                      : "w-4 bg-[var(--pnp-charcoal)]/15"
+                  }`}
+                />
+              );
+
+              if (l.to) {
+                return (
+                  <li key={l.label}>
+                    <Link
+                      to={l.to}
+                      onClick={onClose}
+                      aria-current={active ? "page" : undefined}
+                      className={linkClass}
+                    >
+                      <span>{l.label}</span>
+                      {indicator}
+                    </Link>
+                  </li>
+                );
+              }
+
               return (
                 <li key={l.label}>
                   <a
                     href={l.href}
                     onClick={onClose}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`flex items-center justify-between py-4 font-display text-2xl font-medium transition-colors ${
-                      isActive
-                        ? "text-[var(--pnp-dark-teal)]"
-                        : "text-[var(--pnp-charcoal)] hover:text-[var(--pnp-teal)]"
-                    }`}
+                    className={linkClass}
                   >
                     <span>{l.label}</span>
-                    <span
-                      className={`h-px transition-all duration-200 ${
-                        isActive
-                          ? "w-10 bg-[var(--pnp-gold)]"
-                          : "w-4 bg-[var(--pnp-charcoal)]/15"
-                      }`}
-                    />
+                    {indicator}
                   </a>
                 </li>
               );
@@ -91,20 +130,20 @@ export default function MobileMenu({ open, onClose, links, currentPath = "/" }) 
         </nav>
 
         <div className="mt-auto flex flex-col gap-3 pt-6">
-          <a
-            href="#login"
+          <Link
+            to="/login"
             onClick={onClose}
             className="inline-flex items-center justify-center rounded-md border border-[var(--pnp-dark-teal)]/25 px-6 py-3 text-sm font-semibold text-[var(--pnp-dark-teal)] hover:bg-[var(--pnp-dark-teal)] hover:text-white"
           >
             Member Login
-          </a>
-          <a
-            href="#join"
+          </Link>
+          <Link
+            to="/join"
             onClick={onClose}
             className="inline-flex items-center justify-center rounded-md bg-[var(--pnp-gold)] px-6 py-3 text-sm font-semibold text-[var(--pnp-dark-teal)] hover:bg-[#d9a227]"
           >
             Join PNP
-          </a>
+          </Link>
         </div>
       </div>
     </div>

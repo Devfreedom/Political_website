@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 
+/**
+ * Each nav entry has two URL forms:
+ *   - href:  in-page anchor (used when already on the homepage)
+ *   - to:    full route (used from any other page)
+ *
+ * `SmartNavLink` picks the right one based on current location.
+ */
 const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Policies", href: "#policies" },
-  { label: "Manifesto", href: "#manifesto" },
-  { label: "Structure", href: "#structure" },
-  { label: "News", href: "#news" },
-  { label: "Events", href: "#events" },
+  { label: "About", href: "#about", to: "/about" },
+  { label: "Policies", href: "#policies", to: "/policies" },
+  { label: "Manifesto", href: "#manifesto", to: "/manifesto" },
+  { label: "Structure", href: "#structure", to: "/structure" },
+  { label: "News", href: "#news", to: "/news" },
+  { label: "Events", href: "#events", to: "/events" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const onHome = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -30,7 +40,6 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
-          {/* Logo */}
           <Logo />
 
           {/* Desktop nav */}
@@ -39,34 +48,24 @@ export default function Navbar() {
             className="hidden items-center gap-7 lg:flex"
           >
             {NAV_LINKS.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="group relative text-[14px] font-medium tracking-wide text-[var(--pnp-charcoal)]/80 transition-colors duration-200 hover:text-[var(--pnp-dark-teal)]"
-              >
-                {l.label}
-                <span
-                  aria-hidden="true"
-                  className="absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-[var(--pnp-gold)] transition-all duration-300 group-hover:w-full"
-                />
-              </a>
+              <SmartNavLink key={l.label} link={l} onHome={onHome} />
             ))}
           </nav>
 
           {/* Desktop actions */}
           <div className="hidden items-center gap-3 lg:flex">
-            <a
-              href="#login"
+            <Link
+              to="/login"
               className="rounded-md px-4 py-2.5 text-sm font-semibold text-[var(--pnp-dark-teal)] transition-colors duration-200 hover:bg-[var(--pnp-dark-teal)]/5"
             >
               Member Login
-            </a>
-            <a
-              href="#join"
+            </Link>
+            <Link
+              to="/join"
               className="rounded-md bg-[var(--pnp-teal)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--pnp-dark-teal)] hover:shadow-lg hover:-translate-y-[1px]"
             >
               Join PNP
-            </a>
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -98,5 +97,32 @@ export default function Navbar() {
         />
       </div>
     </>
+  );
+}
+function SmartNavLink({ link, onHome }) {
+  const className =
+    "group relative text-[14px] font-medium tracking-wide text-[var(--pnp-charcoal)]/80 transition-colors duration-200 hover:text-[var(--pnp-dark-teal)]";
+
+  const underline = (
+    <span
+      aria-hidden="true"
+      className="absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-[var(--pnp-gold)] transition-all duration-300 group-hover:w-full"
+    />
+  );
+
+  if (onHome) {
+    return (
+      <a href={link.href} className={className}>
+        {link.label}
+        {underline}
+      </a>
+    );
+  }
+
+  return (
+    <Link to={link.to} className={className}>
+      {link.label}
+      {underline}
+    </Link>
   );
 }

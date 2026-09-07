@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PublicLayout from "../../componentss/layout";
 import Button from "../../componentss/Button";
 import SectionHeading from "../../componentss/SectionHeading";
@@ -18,6 +19,10 @@ import ScrollReveal from "../../componentss/ScrollReveal";
 import { leadership } from "../../data/leadership";
 import { electedOfficials } from "../../data/electedOfficials";
 import { faq } from "../../data/faq";
+import { priorities } from "../../data/priorities.jsx";
+import { principles } from "../../data/principles";
+import { news } from "../../data/news";
+import { events } from "../../data/events";
 import { getInvolved } from "../../data/getInvolved.jsx";
 
 /* --------------------------- Static data --------------------------- */
@@ -28,79 +33,14 @@ const NATIONAL_REACH = [
   { value: "1", kicker: "Shared Vision", label: "Progress · Unity · Opportunity" },
 ];
 
-const PRIORITIES = [
-  {
-    title: "Economic Opportunity",
-    description:
-      "A modernised economy that creates jobs, lifts productivity and rewards enterprise — anchored by credible industrial, fiscal and monetary policy.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M3 17h16M5 14l3-4 4 3 5-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Education & Skills",
-    description:
-      "Reform of basic, technical and vocational education so every Nigerian child leaves school equipped to learn, work and lead.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M11 3 2 7l9 4 9-4-9-4ZM5 9v5c0 1.5 2.7 3 6 3s6-1.5 6-3V9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Healthcare",
-    description:
-      "Universal primary care, a strengthened NHIA, and investment in local pharmaceutical and research capacity.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M11 19s7-4.4 7-9.5a4.5 4.5 0 1 0-9 0 4.5 4.5 0 1 0-9 0C0 14.6 11 19 11 19Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Infrastructure",
-    description:
-      "Reliable power, modern transport corridors and digital infrastructure that connect every state to opportunity.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M4 18h14M5 18V8l6-4 6 4v10M9 18v-6h4v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Youth & Innovation",
-    description:
-      "A national strategy for young people — credit, training, digital identity and a direct stake in public decision-making.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M11 3a6 6 0 1 0 5.7 8M11 3l5.7 8L11 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-];
+const PRIORITIES = priorities;
 
-const PRINCIPLES = [
-  { title: "Accountable Leadership", body: "A binding commitment to transparent budgets, asset disclosure and the rule of law — at every level of government." },
-  { title: "A Productive Economy", body: "Industrial and trade policy designed to build, make and export more, while supporting small businesses." },
-  { title: "National Unity", body: "An inclusive, federal Nigeria where every state, religion and ethnicity has an equal stake in the project." },
-  { title: "Citizen Participation", body: "Lower barriers to civic engagement and structured participation for women, youth and persons with disabilities." },
-];
+const PRINCIPLES = principles.slice(0, 4); // homepage keeps to 4; the dedicated /manifesto page shows all 6
 
 const LEADERS = leadership;
 
-const NEWS = [
-  { category: "Statement", date: "12 March 2026", title: "PNP outlines a five-point economic recovery plan for 2026", excerpt: "The party has published a detailed framework covering jobs, power, manufacturing, agriculture and youth enterprise.", variant: 0 },
-  { category: "Policy", date: "04 March 2026", title: "Education reforms: a national skills compact with state governments", excerpt: "A new compact proposes shared standards, teacher investment and a modernised TVET curriculum across all 36 states.", variant: 1 },
-  { category: "Party", date: "21 February 2026", title: "PNP inaugurates state executives in 12 additional states", excerpt: "The Party continues its nationwide organising drive, with completed ward executives in over 400 LGAs.", variant: 2 },
-];
-
-const EVENTS = [
-  { day: "18", month: "Apr 2026", title: "National Policy Convention — Abuja", location: "International Conference Centre, Abuja", time: "9:00 AM — 5:00 PM" },
-  { day: "02", month: "May 2026", title: "Town Hall on the Economy — Lagos", location: "Eko Hotel & Suites, Victoria Island", time: "3:00 PM — 7:00 PM" },
-  { day: "21", month: "May 2026", title: "Youth & Innovation Summit — Kano", location: "Kano Business Hub, Kano", time: "10:00 AM — 4:00 PM" },
-];
+const NEWS = news.slice(0, 3);
+const EVENTS = events.slice(0, 3);
 
 /* --------------------------- Page --------------------------- */
 
@@ -184,7 +124,7 @@ export default function Home() {
                 The full manifesto is available as a downloadable document and
                 in accessible formats on request.
               </p>
-              <Button href="#manifesto-full" variant="dark" size="md">
+              <Button href="/manifesto" variant="dark" size="md">
                 Read the complete manifesto
               </Button>
             </div>
@@ -236,7 +176,7 @@ export default function Home() {
               }
               intro="The current National Executive Committee was elected by the founding convention in 2026. Real photographs and biographies will be inserted as the leadership is confirmed publicly."
             />
-            <Button href="#leadership-full" variant="secondary-light" size="md">
+            <Button href="/leadership" variant="secondary-light" size="md">
               View complete leadership
             </Button>
           </div>
@@ -248,7 +188,13 @@ export default function Home() {
 
           <ScrollReveal as="div" className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 md:gap-x-8">
             {LEADERS.slice(1).map((l) => (
-              <LeaderCard key={l.name} {...l} />
+              <Link
+                key={l.slug}
+                to={`/leadership/${l.slug}`}
+                className="block focus:outline-none"
+              >
+                <LeaderCard {...l} />
+              </Link>
             ))}
           </ScrollReveal>
         </div>
@@ -267,7 +213,7 @@ export default function Home() {
               title={<span id="news-heading">Statements & updates.</span>}
               intro="Official statements, policy releases and news from the Party's national secretariat and state chapters."
             />
-            <Button href="#news-all" variant="ghost" size="md">
+            <Button href="/news" variant="ghost" size="md">
               View all news
             </Button>
           </div>
@@ -300,7 +246,7 @@ export default function Home() {
               title={<span id="events-heading">Meet us in your state.</span>}
               intro="Conventions, town halls, policy dialogues and membership drives across the country. Open to all Nigerians."
             />
-            <Button href="#events-all" variant="ghost" size="md">
+            <Button href="/events" variant="ghost" size="md">
               Full event calendar
             </Button>
           </div>
@@ -354,10 +300,10 @@ export default function Home() {
                 free, open and rooted in your ward.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Button href="#membership" variant="primary" size="lg">
+                <Button href="/join" variant="primary" size="lg">
                   Become a member
                 </Button>
-                <Button href="#volunteer" variant="ghost-light" size="lg" trailingIcon={false}>
+                <Button href="/volunteer" variant="ghost-light" size="lg" trailingIcon={false}>
                   Or volunteer with us →
                 </Button>
               </div>

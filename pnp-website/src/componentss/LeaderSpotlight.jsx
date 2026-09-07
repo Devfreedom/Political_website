@@ -98,7 +98,15 @@ export default function LeaderSpotlight({ leader }) {
           )}
 
           <div>
-            <Button href={`#leadership/${leader.id}`} variant="primary" size="md">
+            <Button
+              href={
+                leader.slug
+                  ? `/leadership/${leader.slug}`
+                  : `/leadership/${leader.id}`
+              }
+              variant="primary"
+              size="md"
+            >
               Read full biography
             </Button>
           </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Logo from "./Logo";
 
 const FOOTER_LINKS = {
@@ -25,10 +26,43 @@ const FOOTER_LINKS = {
 };
 
 function NewsletterSignup() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+  const [error, setError] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      setStatus("error");
+      return;
+    }
+    setError("");
+    setStatus("submitting");
+    // Simulate a brief async subscribe; in production this would POST to a real endpoint.
+    setTimeout(() => setStatus("success"), 600);
+  };
+
+  if (status === "success") {
+    return (
+      <div className="mt-10 rounded-md border border-pnp-gold/40 bg-pnp-gold/10 p-6">
+        <p className="text-[11px] font-semibold tracking-[0.32em] uppercase text-pnp-gold">
+          Subscribed
+        </p>
+        <p className="mt-2 text-sm leading-6 text-white/85">
+          Thanks — we'll send policy briefings and major announcements to{" "}
+          <strong className="font-semibold text-white">{email}</strong>. This
+          is a prototype — no real subscription has been created.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form
       aria-label="Newsletter signup"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={onSubmit}
+      noValidate
       className="mt-10 flex flex-col gap-3"
     >
       <label
@@ -45,15 +79,24 @@ function NewsletterSignup() {
           required
           placeholder="you@example.com"
           autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          aria-invalid={status === "error" || undefined}
           className="w-full flex-1 rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-200 focus:border-pnp-gold"
         />
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-md bg-pnp-gold px-6 py-3 text-sm font-semibold text-pnp-dark-teal transition-all duration-200 hover:bg-[#d9a227] hover:shadow-lg hover:-translate-y-[1px]"
+          disabled={status === "submitting"}
+          className="inline-flex items-center justify-center rounded-md bg-pnp-gold px-6 py-3 text-sm font-semibold text-pnp-dark-teal transition-all duration-200 hover:bg-[#d9a227] hover:shadow-lg hover:-translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
         >
-          Subscribe
+          {status === "submitting" ? "Subscribing…" : "Subscribe"}
         </button>
       </div>
+      {status === "error" && error && (
+        <p role="alert" className="text-xs text-[#F2B5BC]">
+          {error}
+        </p>
+      )}
       <p className="text-xs text-white/45">
         We send policy briefings and major announcements only. Unsubscribe at
         any time.
