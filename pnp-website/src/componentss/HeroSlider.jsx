@@ -38,7 +38,7 @@ const SLIDES = [
   },
 ];
 
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 5000;
 
 const SLIDE_MICROSTRIP = (
   <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
@@ -60,17 +60,20 @@ const SLIDE_MICROSTRIP = (
 export default function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  // Timestamp of last manual navigation; auto-rotate waits longer after a manual click.
+  const [manualNavAt, setManualNavAt] = useState(0);
   const regionRef = useRef(null);
 
   const goTo = useCallback((target) => {
     const len = SLIDES.length;
     setIndex((target + len) % len);
+    setManualNavAt(Date.now());
   }, []);
 
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
-  // Auto-rotate
+  // Auto-rotate (paused on hover/focus + for ~3s after manual navigation)
   useEffect(() => {
     if (paused) return undefined;
 
@@ -80,12 +83,15 @@ export default function HeroSlider() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return undefined;
 
+    const sinceManual = Date.now() - manualNavAt;
+    const delay = sinceManual < 3000 ? 3000 - sinceManual : AUTOPLAY_MS;
+
     const id = setTimeout(() => {
       setIndex((current) => (current + 1) % SLIDES.length);
-    }, AUTOPLAY_MS);
+    }, delay);
 
     return () => clearTimeout(id);
-  }, [index, paused]);
+  }, [index, paused, manualNavAt]);
 
   // Pause when tab is hidden
   useEffect(() => {
