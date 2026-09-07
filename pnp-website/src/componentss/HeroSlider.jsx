@@ -143,58 +143,55 @@ export default function HeroSlider() {
         className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 py-24 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:py-32"
       >
         {/* Left — slide text */}
-        <div className="relative lg:col-span-7 xl:col-span-7">
-          {SLIDES.map((slide, i) => (
-            <div
-              key={slide.id}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${SLIDES.length}`}
-              aria-hidden={i !== index}
-              className={`transition-opacity duration-700 ${
-                i === index
-                  ? "relative opacity-100"
-                  : "pointer-events-none absolute inset-0 opacity-0"
-              }`}
-            >
-              <span className="inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.32em] uppercase text-[var(--pnp-gold)]">
-                <span className="h-px w-10 bg-current opacity-80" aria-hidden="true" />
-                {slide.eyebrow}
-              </span>
+        <div className="relative min-h-[460px] overflow-hidden lg:col-span-7 xl:col-span-7">
+          {SLIDES.map((slide, i) =>
+            i === index ? (
+              <div
+                key={slide.id}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${i + 1} of ${SLIDES.length}`}
+                className="animate-[fadeSlideIn_700ms_ease-out] relative"
+              >
+                <span className="inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.32em] uppercase text-[var(--pnp-gold)]">
+                  <span className="h-px w-10 bg-current opacity-80" aria-hidden="true" />
+                  {slide.eyebrow}
+                </span>
 
-              <div id="hero-heading">
-                <h1 className="mt-8 font-display text-[56px] font-medium uppercase leading-[0.96] tracking-tight md:text-[88px] lg:text-[104px]">
-                  {slide.headlineLines.map((line, j) => (
-                    <span
-                      key={j}
-                      className={`block ${
-                        j === 1 ? "pl-6 text-white/95 md:pl-12" : ""
-                      } ${j === 2 ? "pl-12 text-[var(--pnp-gold)] md:pl-24" : ""}`}
-                    >
-                      {line}
-                    </span>
-                  ))}
-                </h1>
+                <div id="hero-heading">
+                  <h1 className="mt-8 font-display text-[56px] font-medium uppercase leading-[0.96] tracking-tight md:text-[88px] lg:text-[104px]">
+                    {slide.headlineLines.map((line, j) => (
+                      <span
+                        key={j}
+                        className={`block ${
+                          j === 1 ? "pl-6 text-white/95 md:pl-12" : ""
+                        } ${j === 2 ? "pl-12 text-[var(--pnp-gold)] md:pl-24" : ""}`}
+                      >
+                        {line}
+                      </span>
+                    ))}
+                  </h1>
+                </div>
+
+                <div className="mt-10 max-w-xl border-l-2 border-[var(--pnp-gold)] pl-5">
+                  <p className="text-lg leading-8 text-white/80 md:text-xl">
+                    {slide.statement}
+                  </p>
+                </div>
+
+                <div className="mt-12 flex flex-wrap items-center gap-4">
+                  <Button href={slide.primaryCta.href} variant="primary" size="lg">
+                    {slide.primaryCta.label}
+                  </Button>
+                  <Button href={slide.secondaryCta.href} variant="secondary-light" size="lg">
+                    {slide.secondaryCta.label}
+                  </Button>
+                </div>
+
+                {SLIDE_MICROSTRIP}
               </div>
-
-              <div className="mt-10 max-w-xl border-l-2 border-[var(--pnp-gold)] pl-5">
-                <p className="text-lg leading-8 text-white/80 md:text-xl">
-                  {slide.statement}
-                </p>
-              </div>
-
-              <div className="mt-12 flex flex-wrap items-center gap-4">
-                <Button href={slide.primaryCta.href} variant="primary" size="lg">
-                  {slide.primaryCta.label}
-                </Button>
-                <Button href={slide.secondaryCta.href} variant="secondary-light" size="lg">
-                  {slide.secondaryCta.label}
-                </Button>
-              </div>
-
-              {i === index && SLIDE_MICROSTRIP}
-            </div>
-          ))}
+            ) : null
+          )}
         </div>
 
         {/* Right — static logo panel */}
