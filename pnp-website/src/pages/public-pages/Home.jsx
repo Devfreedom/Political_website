@@ -8,7 +8,6 @@ import ManifestoPreview from "../../componentss/ManifestoPreview";
 import StructureSection from "../../componentss/StructureSection";
 import LeaderCard from "../../componentss/LeaderCard";
 import LeaderSpotlight from "../../componentss/LeaderSpotlight";
-import ElectedOfficialsStrip from "../../componentss/ElectedOfficialsStrip";
 import NewsCard from "../../componentss/NewsCard";
 import EventCard from "../../componentss/EventCard";
 import FAQ from "../../componentss/FAQ";
@@ -17,7 +16,6 @@ import HeroSlider from "../../componentss/HeroSlider";
 import ScrollReveal from "../../componentss/ScrollReveal";
 
 import { leadership } from "../../data/leadership";
-import { electedOfficials } from "../../data/electedOfficials";
 import { faq } from "../../data/faq";
 import { priorities } from "../../data/priorities.jsx";
 import { principles } from "../../data/principles";
@@ -58,9 +56,6 @@ export default function Home() {
           <StatStrip items={NATIONAL_REACH} />
         </div>
       </section>
-
-      {/* B1. ELECTED OFFICIALS STRIP ---------------------------------- */}
-      <ElectedOfficialsStrip items={electedOfficials} />
 
       {/* 4. OUR PRIORITIES ------------------------------------------- */}
       <section
