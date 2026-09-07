@@ -98,6 +98,12 @@ h4 {
   transform: none;
 }
 
+/* Hero slide crossfade-in */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Reduce motion respectfully */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -119,6 +125,12 @@ h4 {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+  }
+  /* Hero slide crossfade-in: snap to final state instantly */
+  [class*="animate-[fadeSlideIn"] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
