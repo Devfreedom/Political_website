@@ -5,8 +5,10 @@ import SectionHeading from "./SectionHeading";
  * FAQ — single-open-at-a-time accordion.
  * Reuses the 01/02/03 numbering treatment from PriorityCard / ManifestoPreview.
  */
-export default function FAQ({ items }) {
-  const [openId, setOpenId] = useState(items[0]?.id ?? null);
+export default function FAQ({ items, defaultOpen = false }) {
+  const [openId, setOpenId] = useState(
+    defaultOpen ? items[0]?.id ?? null : null
+  );
 
   const toggle = (id) => {
     setOpenId((current) => (current === id ? null : id));
@@ -49,14 +51,20 @@ export default function FAQ({ items }) {
                     </span>
                     <span
                       aria-hidden="true"
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[var(--pnp-charcoal)]/15 text-[var(--pnp-dark-teal)] transition-all duration-300 ${
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md transition-all duration-300 ${
                         isOpen
-                          ? "rotate-45 border-[var(--pnp-gold)] text-[var(--pnp-gold)]"
-                          : ""
+                          ? "rotate-180 bg-pnp-gold text-pnp-dark-teal"
+                          : "bg-pnp-gold/10 text-[var(--pnp-dark-teal)]"
                       }`}
                     >
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M7 1.5v11M1.5 7h11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                        <path
+                          d="M3 5.5 7 9.5l4-4"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </span>
                   </button>

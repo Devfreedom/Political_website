@@ -12,7 +12,8 @@ import NewsCard from "../../componentss/NewsCard";
 import EventCard from "../../componentss/EventCard";
 import FAQ from "../../componentss/FAQ";
 import GetInvolved from "../../componentss/GetInvolved";
-import pnpLogo from "../../assets/pnp_logo_1_cutout.png";
+import HeroSlider from "../../componentss/HeroSlider";
+import ScrollReveal from "../../componentss/ScrollReveal";
 
 import { leadership } from "../../data/leadership";
 import { electedOfficials } from "../../data/electedOfficials";
@@ -107,106 +108,7 @@ export default function Home() {
   return (
     <PublicLayout>
       {/* 2. HERO ----------------------------------------------------- */}
-      <section
-        id="home"
-        aria-labelledby="hero-heading"
-        className="relative overflow-hidden bg-[var(--pnp-dark-teal)] text-white"
-      >
-        <svg
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.07]"
-        >
-          <defs>
-            <pattern id="heroGrid" width="56" height="56" patternUnits="userSpaceOnUse">
-              <path d="M56 0H0V56" fill="none" stroke="#E5B13A" strokeWidth="0.6" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#heroGrid)" />
-        </svg>
-
-        <span aria-hidden="true" className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-white/5 lg:block" />
-
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 py-24 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:py-32">
-          <div className="lg:col-span-7 xl:col-span-7">
-            <span className="inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.32em] uppercase text-[var(--pnp-gold)]">
-              <span className="h-px w-10 bg-current opacity-80" aria-hidden="true" />
-              Est. 2026 · Progress. Unity. Opportunity.
-            </span>
-
-            <h1
-              id="hero-heading"
-              className="mt-8 font-display text-[56px] font-medium uppercase leading-[0.96] tracking-tight md:text-[88px] lg:text-[104px]"
-            >
-              <span className="block">Building</span>
-              <span className="block pl-6 text-white/95 md:pl-12">a progressive</span>
-              <span className="block pl-12 text-[var(--pnp-gold)] md:pl-24">
-                Nigeria.
-              </span>
-            </h1>
-
-            <div className="mt-10 max-w-xl border-l-2 border-[var(--pnp-gold)] pl-5">
-              <p className="text-lg leading-8 text-white/80 md:text-xl">
-                A progressive national political party committed to accountable
-                leadership, economic opportunity, national unity and meaningful
-                citizen participation.
-              </p>
-            </div>
-
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              <Button href="#join" variant="primary" size="lg">
-                Join the Party
-              </Button>
-              <Button href="#manifesto" variant="secondary-light" size="lg">
-                Read our Manifesto
-              </Button>
-            </div>
-
-            <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
-              <div>
-                <p className="font-display text-2xl font-medium leading-none text-white">36</p>
-                <p className="mt-2 text-[11px] tracking-[0.24em] uppercase text-white/60">States</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl font-medium leading-none text-white">774</p>
-                <p className="mt-2 text-[11px] tracking-[0.24em] uppercase text-white/60">LGAs</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl font-medium leading-none text-white">1</p>
-                <p className="mt-2 text-[11px] tracking-[0.24em] uppercase text-white/60">Vision</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative lg:col-span-5 xl:col-span-5">
-            <div className="relative mx-auto flex aspect-square max-w-[480px] items-center justify-center">
-              <span aria-hidden="true" className="absolute inset-0 rounded-full border border-white/10" />
-              <span aria-hidden="true" className="absolute inset-6 rounded-full border border-white/10" />
-              <span aria-hidden="true" className="absolute inset-12 rounded-full border border-[var(--pnp-gold)]/30" />
-              <span aria-hidden="true" className="absolute inset-20 rounded-full border border-[var(--pnp-gold)]/15" />
-
-              <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full" aria-hidden="true">
-                <path d="M100 10 A90 90 0 0 1 190 100" fill="none" stroke="#E5B13A" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-
-              <div className="relative flex flex-col items-center text-center">
-                <img
-                  src={pnpLogo}
-                  alt="Progressive Nigeria Party logo"
-                  width="320"
-                  height="213"
-                  className="h-auto w-[78%] max-w-[360px] object-contain"
-                />
-                <span className="mt-6 text-[10px] font-semibold tracking-[0.4em] uppercase text-[var(--pnp-gold)]">
-                  Progressive · Nigeria · Party
-                </span>
-              </div>
-
-              <span aria-hidden="true" className="absolute left-2 top-2 h-6 w-6 border-l border-t border-[var(--pnp-gold)]/60" />
-              <span aria-hidden="true" className="absolute right-2 bottom-2 h-6 w-6 border-b border-r border-[var(--pnp-gold)]/60" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSlider />
 
       {/* 3. NATIONAL REACH STRIP ------------------------------------- */}
       <section aria-label="National reach" className="relative bg-[var(--pnp-teal)]">
@@ -239,7 +141,7 @@ export default function Home() {
               intro="A focused agenda. Not a thousand promises — a clear set of priorities backed by credible policy and a willingness to be measured against them."
             />
 
-            <div className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
+            <ScrollReveal as="div" className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
               {PRIORITIES.map((p, i) => (
                 <PriorityCard
                   key={p.title}
@@ -249,7 +151,7 @@ export default function Home() {
                   icon={p.icon}
                 />
               ))}
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -273,9 +175,9 @@ export default function Home() {
               intro="Our 2026 manifesto sets out clear principles — not vague aspirations. Below is a preview; the full document details our policy commitments across every sector."
             />
 
-            <div className="mt-14">
+            <ScrollReveal as="div" className="mt-14">
               <ManifestoPreview principles={PRINCIPLES} />
-            </div>
+            </ScrollReveal>
 
             <div className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-[var(--pnp-charcoal)]/10 pt-8 md:flex-row md:items-center">
               <p className="max-w-xl text-[15px] leading-7 text-[var(--pnp-slate)]">
@@ -308,7 +210,9 @@ export default function Home() {
               }
               intro="PNP is organised as a clear institutional hierarchy from the National Executive to every registered member. Our mandate flows upward from citizens — and accountability flows downward."
             />
-            <StructureSection />
+            <ScrollReveal as="div">
+              <StructureSection />
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -342,11 +246,11 @@ export default function Home() {
             <LeaderSpotlight leader={LEADERS[0]} />
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 md:gap-x-8">
+          <ScrollReveal as="div" className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 md:gap-x-8">
             {LEADERS.slice(1).map((l) => (
               <LeaderCard key={l.name} {...l} />
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -368,7 +272,7 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">
+          <ScrollReveal as="div" className="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">
             {NEWS.map((n, i) => (
               <NewsCard
                 key={n.title}
@@ -379,7 +283,7 @@ export default function Home() {
                 variant={i}
               />
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -401,11 +305,11 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="mt-10 border-t border-[var(--pnp-charcoal)]/10">
+          <ScrollReveal as="div" className="mt-10 border-t border-[var(--pnp-charcoal)]/10">
             {EVENTS.map((e) => (
               <EventCard key={e.title} {...e} />
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 

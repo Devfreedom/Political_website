@@ -32,7 +32,8 @@ export default function CountUp({
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduced || !("IntersectionObserver" in window)) {
-      setValue(to);
+      // Defer so this isn't a synchronous setState inside the effect body.
+      queueMicrotask(() => setValue(to));
       return undefined;
     }
 

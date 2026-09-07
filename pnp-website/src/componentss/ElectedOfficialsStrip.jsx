@@ -2,7 +2,9 @@
  * ElectedOfficialsStrip — distinct full-width teal band.
  * Four translucent-panel cards with circular icon, big number, label.
  * Uses bg-pnp-white/10 panels to match the hero's translucent-circle treatment.
+ * Numbers animate from 0 on first viewport entry.
  */
+import CountUp from "./CountUp";
 const ICONS = {
   "Governors": (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
@@ -64,7 +66,7 @@ export default function ElectedOfficialsStrip({ items }) {
                 {ICONS[item.label] ?? null}
               </div>
               <p className="mt-6 font-display text-5xl font-medium leading-none tracking-tight text-pnp-white md:text-6xl">
-                {item.count}
+                <CountUp to={item.count} duration={1200} />
               </p>
               <p className="mt-3 text-xs font-medium tracking-[0.18em] uppercase text-white/75">
                 {item.label}

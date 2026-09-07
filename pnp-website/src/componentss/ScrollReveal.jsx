@@ -35,12 +35,13 @@ export default function ScrollReveal({
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      setVisible(true);
+      // Defer so this isn't a synchronous setState inside the effect body.
+      queueMicrotask(() => setVisible(true));
       return undefined;
     }
 
     if (!("IntersectionObserver" in window)) {
-      setVisible(true);
+      queueMicrotask(() => setVisible(true));
       return undefined;
     }
 
@@ -65,7 +66,6 @@ export default function ScrollReveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [delay, threshold, once]);
 
   const classes = [
