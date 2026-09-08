@@ -30,7 +30,7 @@ const SLIDES = [
   {
     id: "join",
     eyebrow: "Get Involved",
-    headlineLines: ["Built from", "the ward", "up."],
+    headlineLines: ["Built from", "the ward up."],
     statement:
       "A party is only as strong as the people who show up for it. Join thousands of Nigerians in every state building a political party worthy of the country's promise.",
     primaryCta: { label: "Become a member", href: "/join" },
