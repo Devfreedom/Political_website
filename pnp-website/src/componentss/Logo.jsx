@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Logo({
   variant = "dark",
   withWordmark = true,
@@ -12,8 +14,8 @@ export default function Logo({
   const accentStroke = "#E5B13A";
 
   return (
-    <a
-      href="/"
+    <Link
+      to="/"
       aria-label="Progressive Nigeria Party — home"
       className="group inline-flex items-center gap-3"
     >
@@ -84,6 +86,6 @@ export default function Logo({
           </span>
         </span>
       )}
-    </a>
+    </Link>
   );
 }

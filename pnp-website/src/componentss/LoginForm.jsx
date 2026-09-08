@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 /**
@@ -161,22 +162,22 @@ export default function LoginForm() {
 
           <p className="mt-6 text-center text-xs text-[var(--pnp-slate)]">
             Forgot your password?{" "}
-            <a
-              href="/password-reset"
+            <Link
+              to="/password-reset"
               className="font-semibold text-[var(--pnp-dark-teal)] hover:underline"
             >
               Reset it
-            </a>
+            </Link>
             .
           </p>
           <p className="mt-2 text-center text-xs text-[var(--pnp-slate)]">
             Not a member yet?{" "}
-            <a
-              href="/join"
+            <Link
+              to="/join"
               className="font-semibold text-[var(--pnp-dark-teal)] hover:underline"
             >
               Join PNP
-            </a>
+            </Link>
             .
           </p>
         </form>
