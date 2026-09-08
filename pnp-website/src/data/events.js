@@ -24,7 +24,7 @@ export const events = [
     slug: "youth-innovation-summit-kano-nov-2026",
   },
   {
-    day: "12",
+    day: "04",
     month: "Dec 2026",
     title: "Education Reform Dialogue — Enugu",
     location: "Enugu State Civic Centre",
@@ -32,7 +32,7 @@ export const events = [
     slug: "education-reform-dialogue-enugu-dec-2026",
   },
   {
-    day: "04",
+    day: "12",
     month: "Dec 2026",
     title: "Healthcare Policy Workshop — Ilorin",
     location: "Kwara State Banquet Hall",
