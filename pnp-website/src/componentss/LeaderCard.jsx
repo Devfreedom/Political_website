@@ -58,7 +58,7 @@ export default function LeaderCard({
             alt={imageAlt || `Portrait of ${name}`}
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-top aspect-[3/4]"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
