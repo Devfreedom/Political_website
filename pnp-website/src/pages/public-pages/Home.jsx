@@ -221,6 +221,7 @@ export default function Home() {
                 date={n.date}
                 title={n.title}
                 excerpt={n.excerpt}
+                slug={n.slug}
                 variant={i}
               />
             ))}

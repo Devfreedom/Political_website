@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 /**
  * NewsCard — editorial article card with category, date, headline and excerpt.
  * Uses an SVG-based editorial visual so the section is ready to drop in
@@ -8,7 +10,7 @@ export default function NewsCard({
   date,
   title,
   excerpt,
-  href = "#",
+  slug,
   variant = 0,
 }) {
   const palettes = [
@@ -20,7 +22,7 @@ export default function NewsCard({
 
   return (
     <article className="group flex flex-col">
-      <a href={href} className="block focus:outline-none">
+      <Link to={`/news/${slug}`} className="block focus:outline-none">
         <div
           className="relative aspect-[16/10] overflow-hidden"
           style={{ backgroundColor: p.bg }}
@@ -97,7 +99,7 @@ export default function NewsCard({
             </svg>
           </span>
         </div>
-      </a>
+      </Link>
     </article>
   );
 }

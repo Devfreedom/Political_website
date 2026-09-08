@@ -55,3 +55,7 @@ export const news = [
     slug: "pnp-registers-with-inec",
   },
 ];
+
+export function findNewsBySlug(slug) {
+  return news.find((item) => item.slug === slug) ?? null;
+}
