@@ -20,7 +20,7 @@ export default function StatStrip({ items }) {
             </dt>
             <dd className="font-display text-5xl font-medium leading-none tracking-tight text-white md:text-6xl lg:text-7xl">
               {numeric ? (
-                <CountUp to={Number(item.value)} duration={1400} />
+                <CountUp to={item.value} duration={1400} />
               ) : (
                 item.value
               )}

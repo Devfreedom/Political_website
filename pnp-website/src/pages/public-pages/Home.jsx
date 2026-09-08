@@ -26,9 +26,9 @@ import { getInvolved } from "../../data/getInvolved.jsx";
 /* --------------------------- Static data --------------------------- */
 
 const NATIONAL_REACH = [
-  { value: "36", kicker: "States", label: "Across Nigeria" },
-  { value: "774", kicker: "Local Gov't Areas", label: "Grassroots presence" },
-  { value: "1", kicker: "Shared Vision", label: "Progress · Unity · Opportunity" },
+  { value: 36, kicker: "States", label: "Across Nigeria" },
+  { value: 774, kicker: "Local Gov't Areas", label: "Grassroots presence" },
+  { value: 1, kicker: "Shared Vision", label: "Progress · Unity · Opportunity" },
 ];
 
 const PRIORITIES = priorities;

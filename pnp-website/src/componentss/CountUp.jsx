@@ -21,19 +21,29 @@ export default function CountUp({
   const ref = useRef(null);
   const [value, setValue] = useState(start);
   const playedRef = useRef(false);
+  const frameRef = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return undefined;
 
+    const target = Number(to);
     const reduced =
       typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    const finish = () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+      setValue(target);
+    };
+
     if (reduced || !("IntersectionObserver" in window)) {
       // Defer so this isn't a synchronous setState inside the effect body.
-      queueMicrotask(() => setValue(to));
+      queueMicrotask(finish);
       return undefined;
     }
 
@@ -45,16 +55,16 @@ export default function CountUp({
         const elapsed = now - begin;
         const progress = Math.min(elapsed / duration, 1);
         const eased = easeOutCubic(progress);
-        const current = start + (to - start) * eased;
+        const current = start + (target - start) * eased;
         // Avoid showing "37.4" — round to integer for clean institutional stats.
         setValue(Math.round(current));
         if (progress < 1) {
-          requestAnimationFrame(tick);
+          frameRef.current = requestAnimationFrame(tick);
         } else {
-          setValue(to);
+          finish();
         }
       };
-      requestAnimationFrame(tick);
+      frameRef.current = requestAnimationFrame(tick);
     };
 
     const observer = new IntersectionObserver(
@@ -71,7 +81,13 @@ export default function CountUp({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
   }, [to, duration, start]);
 
   return (
