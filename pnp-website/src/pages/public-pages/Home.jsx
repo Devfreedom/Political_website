@@ -154,7 +154,7 @@ export default function Home() {
 
       {/* 7. LEADERSHIP ----------------------------------------------- */}
       <section
-        id="about"
+        id="leadership"
         className="bg-[var(--pnp-charcoal)] text-white"
         aria-labelledby="leadership-heading"
       >

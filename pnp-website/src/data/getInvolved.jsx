@@ -5,7 +5,7 @@ export const getInvolved = [
     title: "Volunteer",
     body:
       "Help organise your ward, knock on doors, support conventions and town halls — every minute counts in a party that is being built from the ground up.",
-    cta: { label: "Sign up to volunteer", href: "#volunteer" },
+    cta: { label: "Sign up to volunteer", href: "/volunteer" },
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
         <path
@@ -31,7 +31,7 @@ export const getInvolved = [
     title: "Register to Vote",
     body:
       "Make sure your voice is heard at every level of government. Update your voter registration, claim your PVC, and stay election-ready.",
-    cta: { label: "Get your PVC", href: "#register" },
+    cta: { label: "Get your PVC", href: "/register" },
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
         <path
@@ -57,7 +57,7 @@ export const getInvolved = [
     title: "Donate",
     body:
       "PNP is funded by transparent, publicly disclosed member contributions. Every donation — large or small — supports the Party's organising work.",
-    cta: { label: "Contribute today", href: "#donate" },
+    cta: { label: "Contribute today", href: "/donate" },
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
         <path

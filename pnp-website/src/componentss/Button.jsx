@@ -58,6 +58,17 @@ export default function Button({
   const classes = `${BASE} ${SIZES[size]} ${VARIANTS[variant]} ${className}`.trim();
   const icon = trailingIcon ? <Arrow /> : null;
 
+  const isInternalRoute = typeof href === "string" && href.startsWith("/");
+
+  if (isInternalRoute) {
+    return (
+      <Link to={href} className={`group ${classes}`} {...rest}>
+        {children}
+        {icon}
+      </Link>
+    );
+  }
+
   if (href) {
     return (
       <a href={href} className={`group ${classes}`} {...rest}>
@@ -73,3 +84,4 @@ export default function Button({
     </button>
   );
 }
+import { Link } from "react-router-dom";

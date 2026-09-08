@@ -162,7 +162,7 @@ export default function LoginForm() {
           <p className="mt-6 text-center text-xs text-[var(--pnp-slate)]">
             Forgot your password?{" "}
             <a
-              href="#reset"
+              href="/password-reset"
               className="font-semibold text-[var(--pnp-dark-teal)] hover:underline"
             >
               Reset it

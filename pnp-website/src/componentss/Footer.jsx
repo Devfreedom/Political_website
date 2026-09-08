@@ -1,27 +1,24 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const FOOTER_LINKS = {
   Party: [
-    { label: "About PNP", href: "#about" },
-    { label: "Policies", href: "#policies" },
-    { label: "Manifesto", href: "#manifesto" },
-    { label: "Leadership", href: "#leadership" },
-    { label: "News", href: "#news" },
+    { label: "About PNP", to: "/about" },
+    { label: "Policies", to: "/policies" },
+    { label: "Manifesto", to: "/manifesto" },
+    { label: "Leadership", to: "/leadership" },
+    { label: "News", to: "/news" },
   ],
   GetInvolved: [
-    { label: "Join the Party", href: "#join" },
-    { label: "Volunteer", href: "#volunteer" },
-    { label: "Donate", href: "#donate" },
-    { label: "Events", href: "#events" },
-    { label: "Member Login", href: "#login" },
+    { label: "Join the Party", to: "/join" },
+    { label: "Volunteer", to: "/volunteer" },
+    { label: "Donate", to: "/donate" },
+    { label: "Events", to: "/events" },
+    { label: "Member Login", to: "/login" },
   ],
   Resources: [
-    { label: "Structure", href: "#structure" },
-    { label: "Press Room", href: "#press" },
-    { label: "Publications", href: "#publications" },
-    { label: "Contact", href: "#contact" },
-    { label: "Privacy Policy", href: "#privacy" },
+    { label: "Structure", to: "/structure" },
   ],
 };
 
@@ -161,12 +158,12 @@ export default function Footer() {
                 <ul className="flex flex-col gap-3">
                   {links.map((l) => (
                     <li key={l.label}>
-                      <a
-                        href={l.href}
+                      <Link
+                        to={l.to}
                         className="text-[15px] text-white/70 transition-colors duration-200 hover:text-white"
                       >
                         {l.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

@@ -8,7 +8,9 @@ import StructurePage from "./pages/public-pages/StructurePage";
 import LeadershipPage from "./pages/public-pages/LeadershipPage";
 import LeaderDetailPage from "./pages/public-pages/LeaderDetailPage";
 import NewsPage from "./pages/public-pages/NewsPage";
+import NewsDetailPage from "./pages/public-pages/NewsDetailPage";
 import EventsPage from "./pages/public-pages/EventsPage";
+import EventDetailPage from "./pages/public-pages/EventDetailPage";
 import JoinPage from "./pages/public-pages/JoinPage";
 import LoginPage from "./pages/public-pages/LoginPage";
 import NotFoundPage from "./pages/public-pages/NotFoundPage";
@@ -27,7 +29,9 @@ export default function App() {
       <Route path="/leadership" element={<LeadershipPage />} />
       <Route path="/leadership/:slug" element={<LeaderDetailPage />} />
       <Route path="/news" element={<NewsPage />} />
+      <Route path="/news/:slug" element={<NewsDetailPage />} />
       <Route path="/events" element={<EventsPage />} />
+      <Route path="/events/:slug" element={<EventDetailPage />} />
       <Route path="/join" element={<JoinPage />} />
       <Route path="/login" element={<LoginPage />} />
 
@@ -56,6 +60,24 @@ export default function App() {
           <ComingSoon
             title="Register to vote"
             description="Voter registration is administered by INEC. We'll link out to the official portal once integrated."
+          />
+        }
+      />
+      <Route
+        path="/password-reset"
+        element={
+          <ComingSoon
+            title="Password reset"
+            description="Member accounts are not active in this frontend prototype. Password reset will be available when the member portal launches."
+          />
+        }
+      />
+      <Route
+        path="/manifesto/full"
+        element={
+          <ComingSoon
+            title="Full PNP manifesto"
+            description="The complete manifesto document is being prepared for publication. The current public site contains a preview of its core principles."
           />
         }
       />

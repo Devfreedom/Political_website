@@ -25,7 +25,7 @@ export default function ManifestoPage() {
               The full manifesto is available as a downloadable document and
               in accessible formats on request.
             </p>
-            <Button href="#manifesto-full" variant="dark" size="md">
+            <Button href="/manifesto/full" variant="dark" size="md">
               Read the complete manifesto
             </Button>
           </div>

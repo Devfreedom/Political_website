@@ -28,6 +28,7 @@ export default function ScrollReveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return undefined;
+    let delayTimer;
 
     // Respect reduced motion: snap to visible immediately, no observer.
     if (
@@ -50,9 +51,9 @@ export default function ScrollReveal({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             if (delay > 0) {
-              const t = setTimeout(() => setVisible(true), delay);
-              // Clean up if the component unmounts mid-delay.
-              return () => clearTimeout(t);
+              delayTimer = setTimeout(() => setVisible(true), delay);
+              if (once) observer.unobserve(entry.target);
+              return;
             }
             setVisible(true);
             if (once) observer.unobserve(entry.target);
@@ -65,7 +66,10 @@ export default function ScrollReveal({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      if (delayTimer) clearTimeout(delayTimer);
+      observer.disconnect();
+    };
   }, [delay, threshold, once]);
 
   const classes = [

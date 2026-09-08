@@ -33,8 +33,8 @@ const SLIDES = [
     headlineLines: ["Built from", "the ward", "up."],
     statement:
       "A party is only as strong as the people who show up for it. Join thousands of Nigerians in every state building a political party worthy of the country's promise.",
-    primaryCta: { label: "Become a member", href: "#membership" },
-    secondaryCta: { label: "Volunteer with us", href: "#volunteer" },
+    primaryCta: { label: "Become a member", href: "/join" },
+    secondaryCta: { label: "Volunteer with us", href: "/volunteer" },
   },
 ];
 
