@@ -51,7 +51,7 @@ export default function LeaderSpotlight({ leader }) {
               alt={leader.imageAlt || `Portrait of ${leader.name}`}
               loading="eager"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover object-top aspect-[3/4]"
             />
           ) : (
             <div className="relative flex flex-col items-center">
