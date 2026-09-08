@@ -11,7 +11,7 @@ import MobileMenu from "./MobileMenu";
  * `SmartNavLink` picks the right one based on current location.
  */
 const NAV_LINKS = [
-  { label: "About", href: "#about", to: "/about" },
+  { label: "About", to: "/about" },
   { label: "Policies", href: "#policies", to: "/policies" },
   { label: "Manifesto", href: "#manifesto", to: "/manifesto" },
   { label: "Structure", href: "#structure", to: "/structure" },
