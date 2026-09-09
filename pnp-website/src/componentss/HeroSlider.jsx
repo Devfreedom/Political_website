@@ -57,22 +57,87 @@ const SLIDE_MICROSTRIP = (
   </div>
 );
 
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return reduced;
+}
+
+function SlideContent({ slide, index, reduced }) {
+  const slideCount = SLIDES.length;
+  return (
+    <div
+      key={slide.id}
+      role="group"
+      aria-roledescription="slide"
+      aria-label={`${index + 1} of ${slideCount}`}
+      className={reduced ? "" : "animate-[fadeSlideIn_700ms_ease-out]"}
+    >
+      <p
+        className="mb-6 text-sm font-medium tracking-[0.35em] uppercase text-[var(--pnp-gold)]"
+        aria-hidden="true"
+      >
+        {slide.eyebrow}
+      </p>
+
+      <h1 className="font-display leading-tight tracking-tight text-balance">
+        {slide.headlineLines.map((line, j) => (
+          <span
+            key={j}
+            className={`block text-3xl font-extrabold uppercase md:text-5xl lg:text-6xl ${
+              j === slide.headlineLines.length - 1
+                ? "text-[var(--pnp-gold)]"
+                : "text-white"
+            }`}
+          >
+            {line}
+          </span>
+        ))}
+      </h1>
+
+      <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl">
+        {slide.statement}
+      </p>
+
+      <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:items-start">
+        <Button href={slide.primaryCta.href} variant="primary" size="xl">
+          {slide.primaryCta.label}
+        </Button>
+        <Button href={slide.secondaryCta.href} variant="secondary" size="xl">
+          {slide.secondaryCta.label}
+        </Button>
+      </div>
+
+      {SLIDE_MICROSTRIP}
+    </div>
+  );
+}
+
 export default function HeroSlider() {
-    const [index, setIndex] = useState(0);
-  const [exitingSlide, setExitingSlide] = useState(null);
+  const [index, setIndex] = useState(0);
+  const [exitingSlideId, setExitingSlideId] = useState(null);
   const [paused, setPaused] = useState(false);
-  // Timestamp of last manual navigation; auto-rotate waits longer after a manual click.
   const [manualNavAt, setManualNavAt] = useState(0);
   const regionRef = useRef(null);
+  const reduced = useReducedMotion();
 
-     const goTo = useCallback((target) => {
-    const len = SLIDES.length;
-    const nextIndex = (target + len) % len;
-    // Trigger exit animation on the current slide before changing index
-    setExitingSlide(index);
-    setIndex(nextIndex);
-    setManualNavAt(Date.now());
-  }, [index]);
+  const goTo = useCallback(
+    (target) => {
+      const len = SLIDES.length;
+      const nextIndex = (target + len) % len;
+      setExitingSlideId(SLIDES[index].id);
+      setIndex(nextIndex);
+      setManualNavAt(Date.now());
+    },
+    [index]
+  );
 
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
