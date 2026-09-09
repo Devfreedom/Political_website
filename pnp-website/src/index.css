@@ -104,6 +104,12 @@ h4 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Hero slide crossfade-out (used by dual-render exit pattern) */
+@keyframes fadeSlideOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
 /* Reduce motion respectfully */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -131,6 +137,11 @@ h4 {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+  /* Hero slide crossfade-out: snap to hidden instantly */
+  [class*="animate-[fadeSlideOut"] {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
 
