@@ -58,17 +58,21 @@ const SLIDE_MICROSTRIP = (
 );
 
 export default function HeroSlider() {
-  const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(0);
+  const [exitingSlide, setExitingSlide] = useState(null);
   const [paused, setPaused] = useState(false);
   // Timestamp of last manual navigation; auto-rotate waits longer after a manual click.
   const [manualNavAt, setManualNavAt] = useState(0);
   const regionRef = useRef(null);
 
-  const goTo = useCallback((target) => {
+     const goTo = useCallback((target) => {
     const len = SLIDES.length;
-    setIndex((target + len) % len);
+    const nextIndex = (target + len) % len;
+    // Trigger exit animation on the current slide before changing index
+    setExitingSlide(index);
+    setIndex(nextIndex);
     setManualNavAt(Date.now());
-  }, []);
+  }, [index]);
 
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
