@@ -175,15 +175,16 @@ export default function HeroSlider() {
 
   // Pause when region loses focus
   useEffect(() => {
+        const node = regionRef.current;
     const onFocusBlur = (e) => setPaused(e.type === "focusin");
-    if (regionRef.current) {
-      regionRef.current.addEventListener("focusin", onFocusBlur);
-      regionRef.current.addEventListener("focusout", onFocusBlur);
+    if (node) {
+      node.addEventListener("focusin", onFocusBlur);
+      node.addEventListener("focusout", onFocusBlur);
     }
     return () => {
-      if (regionRef.current) {
-        regionRef.current.removeEventListener("focusin", onFocusBlur);
-        regionRef.current.removeEventListener("focusout", onFocusBlur);
+      if (node) {
+        node.removeEventListener("focusin", onFocusBlur);
+        node.removeEventListener("focusout", onFocusBlur);
       }
     };
   }, []);
