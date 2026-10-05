@@ -71,7 +71,8 @@ export async function hashPassword(password) {
 /** Public shape — never includes the password digest. */
 export function toPublic(user) {
   if (!user) return null;
-  const { passHash: _omit, ...rest } = user;
+  const rest = { ...user };
+  delete rest.passHash;
   return rest;
 }
 

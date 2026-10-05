@@ -47,16 +47,16 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
 
       {/* Member portal (Phase 1: shell + dashboard; children are placeholders) */}
-      <Route path="/member" element={<MemberDashboard />} />
-      <Route path="/member/profile" element={<MemberPlaceholder title="My Profile" />} />
-      <Route path="/member/membership" element={<MemberMembership />} />
-      <Route path="/member/organisation" element={<MemberPlaceholder title="My Organisation" />} />
-      <Route path="/member/events" element={<MemberPlaceholder title="Events" />} />
-      <Route path="/member/announcements" element={<MemberPlaceholder title="Announcements" />} />
-      <Route path="/member/volunteer" element={<MemberPlaceholder title="Volunteer" />} />
-      <Route path="/member/documents" element={<MemberPlaceholder title="Documents" />} />
-      <Route path="/member/messages" element={<MemberPlaceholder title="Messages" />} />
-      <Route path="/member/settings" element={<MemberPlaceholder title="Settings" />} />
+      <Route path="/member" element={<RequireAuth><MemberDashboard /></RequireAuth>} />
+      <Route path="/member/profile" element={<RequireAuth><MemberProfile /></RequireAuth>} />
+      <Route path="/member/membership" element={<RequireAuth><MemberMembership /></RequireAuth>} />
+      <Route path="/member/organisation" element={<RequireAuth><MemberPlaceholder title="My Organisation" /></RequireAuth>} />
+      <Route path="/member/events" element={<RequireAuth><MemberPlaceholder title="Events" /></RequireAuth>} />
+      <Route path="/member/announcements" element={<RequireAuth><MemberPlaceholder title="Announcements" /></RequireAuth>} />
+      <Route path="/member/volunteer" element={<RequireAuth><MemberPlaceholder title="Volunteer" /></RequireAuth>} />
+      <Route path="/member/documents" element={<RequireAuth><MemberPlaceholder title="Documents" /></RequireAuth>} />
+      <Route path="/member/messages" element={<RequireAuth><MemberPlaceholder title="Messages" /></RequireAuth>} />
+      <Route path="/member/settings" element={<RequireAuth><MemberPlaceholder title="Settings" /></RequireAuth>} />
 
       {/* Placeholder routes — share the ComingSoon component with bespoke copy */}
       <Route
@@ -107,5 +107,6 @@ export default function App() {
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    </AuthProvider>
   );
 }
