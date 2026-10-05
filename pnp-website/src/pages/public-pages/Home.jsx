@@ -12,6 +12,8 @@ import NewsCard from "../../componentss/NewsCard";
 import EventCard from "../../componentss/EventCard";
 import FAQ from "../../componentss/FAQ";
 import GetInvolved from "../../componentss/GetInvolved";
+import CommunityStories from "../../componentss/CommunityStories";
+import WardFinder from "../../componentss/WardFinder";
 import HeroSlider from "../../componentss/HeroSlider";
 import ScrollReveal from "../../componentss/ScrollReveal";
 
@@ -73,7 +75,7 @@ export default function Home() {
                   <br className="hidden md:block" /> a better Nigeria.
                 </span>
               }
-              intro="A focused agenda. Not a thousand promises — a clear set of priorities backed by credible policy and a willingness to be measured against them."
+              intro="Five clear priorities — and we will report back on what we do."
             />
 
             <ScrollReveal as="div" className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
