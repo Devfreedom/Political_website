@@ -15,6 +15,7 @@ import JoinPage from "./pages/public-pages/JoinPage";
 import ChaptersPage from "./pages/public-pages/ChaptersPage";
 import VoterInfoPage from "./pages/public-pages/VoterInfoPage";
 import LoginPage from "./pages/public-pages/LoginPage";
+import PrivacyPage from "./pages/public-pages/PrivacyPage";
 import NotFoundPage from "./pages/public-pages/NotFoundPage";
 import MemberDashboard from "./pages/member/MemberDashboard";
 import MemberMembership from "./pages/member/MemberMembership";
@@ -45,6 +46,7 @@ export default function App() {
       <Route path="/chapters" element={<ChaptersPage />} />
       <Route path="/voters" element={<VoterInfoPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
 
       {/* Member portal (Phase 1: shell + dashboard; children are placeholders) */}
       <Route path="/member" element={<RequireAuth><MemberDashboard /></RequireAuth>} />

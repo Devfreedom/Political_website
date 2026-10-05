@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { useAuth } from "../auth/useAuth";
 
@@ -135,6 +135,20 @@ export default function JoinForm() {
   return (
     <section className="bg-[var(--pnp-white)]">
       <div className="mx-auto max-w-2xl px-6 pb-24 pt-2 lg:px-0 lg:pb-32">
+        <p
+          role="note"
+          className="mb-6 rounded-md bg-[var(--pnp-dark-teal)]/5 px-4 py-3 text-center text-xs leading-6 text-[var(--pnp-slate)]"
+        >
+          Prototype — accounts live only in this browser. Do not use real
+          credentials or sensitive information. See the{" "}
+          <Link
+            to="/privacy"
+            className="font-semibold text-[var(--pnp-dark-teal)] hover:underline"
+          >
+            privacy notice
+          </Link>
+          .
+        </p>
         <Progress step={step} />
 
         <form
@@ -384,7 +398,16 @@ function Step4({ data, update }) {
           onChange={(e) => update({ consent: e.target.checked })}
           className="mt-0.5 h-4 w-4 rounded border-[var(--pnp-charcoal)]/30 accent-[var(--pnp-gold)]" />
         <span>
-          I confirm the information above is accurate and I agree to abide by the Party's constitution and code of conduct.
+          I confirm the information above is accurate and I agree to abide by
+          the Party&apos;s constitution and code of conduct. I understand this
+          prototype stores my details only in this browser and I have read the{" "}
+          <Link
+            to="/privacy"
+            className="font-semibold text-[var(--pnp-dark-teal)] underline underline-offset-2 hover:no-underline"
+          >
+            privacy notice
+          </Link>
+          . I will not enter real sensitive information.
         </span>
       </label>
     </div>
