@@ -1,5 +1,7 @@
 import { useId, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useAuth } from "../auth/AuthContext";
 
 /**
  * JoinForm — frontend-only membership registration prototype.
@@ -33,6 +35,8 @@ const initial = {
   email: "",
   phone: "",
   age: "",
+  password: "",
+  confirmPassword: "",
   consent: false,
 };
 
@@ -59,7 +63,9 @@ export default function JoinForm() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState(initial);
   const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { signup } = useAuth();
+  const navigate = useNavigate();
 
   const update = (patch) => setData((d) => ({ ...d, ...patch }));
 
@@ -77,6 +83,12 @@ export default function JoinForm() {
       const ageNum = Number(data.age);
       if (!Number.isFinite(ageNum) || ageNum < 18)
         return "You must be at least 18 years old to join.";
+      if (!data.password || data.password.length < 8)
+        return "Your password must be at least 8 characters long.";
+      if (!/[A-Za-z]/.test(data.password) || !/\d/.test(data.password))
+        return "Your password must include at least one letter and one number.";
+      if (data.password !== data.confirmPassword)
+        return "Passwords do not match. Please re-enter them.";
       if (!data.consent)
         return "Please confirm you agree to the Party's membership terms.";
     }
