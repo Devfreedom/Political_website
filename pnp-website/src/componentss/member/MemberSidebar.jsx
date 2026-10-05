@@ -1,5 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MEMBER_NAV } from "./memberNav";
+import { useAuth } from "../../auth/AuthContext";
 
 function NavItems({ onNavigate }) {
   return (

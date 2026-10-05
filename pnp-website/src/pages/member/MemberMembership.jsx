@@ -3,42 +3,7 @@ import MemberLayout from "../../componentss/member/MemberLayout";
 import MembershipStatusCard from "../../componentss/member/MembershipStatusCard";
 import MembershipCard from "../../componentss/member/MembershipCard";
 import QuickAction from "../../componentss/member/QuickAction";
-import { member } from "../../data/member";
-
-const DETAIL_GROUPS = [
-  {
-    heading: "Personal",
-    rows: [
-      ["Full name", member.fullName],
-      ["Email", member.email],
-      ["Phone", member.phone],
-    ],
-  },
-  {
-    heading: "Organisation",
-    rows: [
-      ["State", member.state],
-      ["LGA", member.lga],
-      ["Ward", member.ward],
-    ],
-  },
-  {
-    heading: "Membership",
-    rows: [
-      ["Member ID", member.id],
-      ["Membership type", member.membershipType],
-      ["Date joined", member.joinedDate],
-      ["Status", member.membershipStatus],
-    ],
-  },
-];
-
-const AFFILIATION = [
-  { label: "Nigeria", sub: "National Executive", current: false },
-  { label: `${member.state} State`, sub: "State chapter", current: false },
-  { label: `${member.lga} LGA`, sub: "LGA executive", current: false },
-  { label: member.ward, sub: "Your ward — current position", current: true },
-];
+import { useAuth } from "../../auth/AuthContext";
 
 const ACTIONS = [
   {
@@ -60,6 +25,43 @@ const ACTIONS = [
 
 /** My Membership — route /member/membership. Status, card, details, affiliation. */
 export default function MemberMembership() {
+  const { currentUser: member } = useAuth();
+
+  const detailGroups = [
+    {
+      heading: "Personal",
+      rows: [
+        ["Full name", member.fullName],
+        ["Email", member.email],
+        ["Phone", member.phone],
+      ],
+    },
+    {
+      heading: "Organisation",
+      rows: [
+        ["State", member.state],
+        ["LGA", member.lga],
+        ["Ward", member.ward],
+      ],
+    },
+    {
+      heading: "Membership",
+      rows: [
+        ["Member ID", member.memberId],
+        ["Membership type", member.membershipType],
+        ["Date joined", member.joinedDate],
+        ["Status", member.membershipStatus],
+      ],
+    },
+  ];
+
+  const affiliation = [
+    { label: "Nigeria", sub: "National Executive", current: false },
+    { label: `${member.state} State`, sub: "State chapter", current: false },
+    { label: `${member.lga} LGA`, sub: "LGA executive", current: false },
+    { label: member.ward, sub: "Your ward — current position", current: true },
+  ];
+
   return (
     <MemberLayout>
       <Link
@@ -115,7 +117,7 @@ export default function MemberMembership() {
           Member details
         </h2>
         <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {DETAIL_GROUPS.map((group) => (
+          {detailGroups.map((group) => (
             <div key={group.heading}>
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--pnp-dark-teal)]">
                 {group.heading}
@@ -153,7 +155,7 @@ export default function MemberMembership() {
             aria-hidden="true"
             className="absolute bottom-3 left-[5px] top-3 w-px bg-[var(--pnp-charcoal)]/15"
           />
-          {AFFILIATION.map((level) => (
+          {affiliation.map((level) => (
             <li key={level.label} className="relative flex gap-4 py-2.5">
               <span
                 aria-hidden="true"
