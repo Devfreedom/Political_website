@@ -149,6 +149,14 @@ export default function Home() {
             />
             <ScrollReveal as="div">
               <StructureSection />
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button href="/chapters" variant="dark" size="md">
+                  Find your local chapter
+                </Button>
+                <Button href="/structure" variant="secondary" size="md">
+                  How the Party is organised
+                </Button>
+              </div>
             </ScrollReveal>
           </div>
         </div>
@@ -167,11 +175,11 @@ export default function Home() {
               eyebrow="Leadership"
               title={
                 <span id="leadership-heading">
-                  The people entrusted
-                  <br className="hidden md:block" /> to lead the Party.
+                  Meet the people
+                  <br className="hidden md:block" /> leading the Party.
                 </span>
               }
-              intro="The current National Executive Committee was elected by the founding convention in 2026. Real photographs and biographies will be inserted as the leadership is confirmed publicly."
+              intro="The current National Executive Committee was elected by the founding convention in 2026."
             />
             <Button href="/leadership" variant="secondary-light" size="md">
               View complete leadership
