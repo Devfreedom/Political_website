@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import PageLayout from "../../componentss/PageLayout";
 import PageHero from "../../componentss/PageHero";
-import Button from "../../componentss/Button";
 import ScrollReveal from "../../componentss/ScrollReveal";
 import LeaderCardLite from "../../componentss/LeaderCardLite";
 import { findLeaderBySlug, leadership } from "../../data/leadership";
@@ -17,6 +16,13 @@ export default function LeaderDetailPage() {
 
   const others = leadership.filter((l) => l.slug !== slug).slice(0, 3);
 
+  // Single consistent record: name → role → metadata → bio → image
+  // Preserve the existing biography without inventing content.
+  // Order below banner: intro, metadata grid, remaining paragraphs, CTA.
+  const bioParagraphs = Array.isArray(leader.bioLong) ? leader.bioLong : [];
+  const introParagraph = bioParagraphs[0] ?? leader.bio ?? "";
+  const remainingParagraphs = bioParagraphs.slice(1);
+
   return (
     <PageLayout>
       <PageHero eyebrow={leader.title} title={leader.name} intro={leader.bio} />
@@ -24,7 +30,8 @@ export default function LeaderDetailPage() {
       <section className="bg-[var(--pnp-white)] py-20 lg:py-28">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr,2fr]">
-            <aside className="md:sticky md:top-28 md:self-start">
+            <aside className="md:self-start">
+              {/* Portrait — unchanged sizing/cropping */}
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--pnp-dark-teal)]">
                 {leader.image ? (
                   <img
@@ -51,33 +58,14 @@ export default function LeaderDetailPage() {
                 />
               </div>
 
-              <dl className="mt-6 grid grid-cols-2 gap-y-4 text-sm">
-                {leader.region && (
-                  <>
-                    <dt className="text-[var(--pnp-slate)]">Region</dt>
-                    <dd className="font-medium text-[var(--pnp-charcoal)]">
-                      {leader.region}
-                    </dd>
-                  </>
-                )}
-                {leader.state && (
-                  <>
-                    <dt className="text-[var(--pnp-slate)]">State</dt>
-                    <dd className="font-medium text-[var(--pnp-charcoal)]">
-                      {leader.state}
-                    </dd>
-                  </>
-                )}
-                <dt className="text-[var(--pnp-slate)]">Tenure</dt>
-                <dd className="font-medium text-[var(--pnp-charcoal)]">
-                  {leader.tenure}
-                </dd>
-              </dl>
-
-              <div className="mt-8">
-                <Button href="/leadership" variant="secondary" size="sm">
-                  ← All leaders
-                </Button>
+              {/* Name banner — full width of portrait column, normal flow */}
+              <div className="w-full border-t-2 border-[var(--pnp-gold)] bg-[var(--pnp-dark-teal)] px-5 py-4">
+                <p className="break-words text-[13px] font-bold uppercase leading-6 tracking-[0.18em] text-white sm:text-sm">
+                  {leader.name}
+                </p>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--pnp-gold)]">
+                  {leader.title}
+                </p>
               </div>
             </aside>
 
@@ -86,10 +74,64 @@ export default function LeaderDetailPage() {
                 <span className="h-px w-8 bg-current opacity-80" aria-hidden="true" />
                 Biography
               </span>
-              <div className="mt-6 max-w-none space-y-5 text-[16px] leading-8 text-[var(--pnp-charcoal)]">
-                {leader.bioLong?.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
+
+              {/* 1. Introductory biography */}
+              {introParagraph && (
+                <p className="mt-6 font-sans text-[15px] leading-8 text-[var(--pnp-charcoal)] md:text-base">
+                  {introParagraph}
+                </p>
+              )}
+
+              {/* 2. Metadata grid — exactly ONE copy, normal flow, no absolute */}
+              <dl className="relative z-10 mt-8 grid grid-cols-2 gap-4 bg-white md:grid-cols-3">
+                {leader.region && (
+                  <div className="rounded-md border border-[var(--pnp-charcoal)]/10 px-4 py-3">
+                    <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--pnp-slate)]">
+                      Region
+                    </dt>
+                    <dd className="mt-1 text-sm font-medium text-[var(--pnp-charcoal)]">
+                      {leader.region}
+                    </dd>
+                  </div>
+                )}
+                {leader.state && (
+                  <div className="rounded-md border border-[var(--pnp-charcoal)]/10 px-4 py-3">
+                    <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--pnp-slate)]">
+                      State
+                    </dt>
+                    <dd className="mt-1 text-sm font-medium text-[var(--pnp-charcoal)]">
+                      {leader.state}
+                    </dd>
+                  </div>
+                )}
+                <div className="rounded-md border border-[var(--pnp-charcoal)]/10 px-4 py-3">
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--pnp-slate)]">
+                    Tenure
+                  </dt>
+                  <dd className="mt-1 text-sm font-medium text-[var(--pnp-charcoal)]">
+                    {leader.tenure}
+                  </dd>
+                </div>
+              </dl>
+
+              {/* 3 + 4. Responsibility / background / education — preserved verbatim */}
+              {remainingParagraphs.length > 0 && (
+                <div className="mt-8 space-y-5 font-sans text-[15px] leading-8 text-[var(--pnp-charcoal)] md:text-base">
+                  {remainingParagraphs.map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
+              )}
+
+              {/* 5. All Members CTA */}
+              <div className="mt-10">
+                <Link
+                  to="/leadership"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-[var(--pnp-dark-teal)] px-5 py-2.5 font-sans text-sm font-semibold text-[var(--pnp-dark-teal)] transition-colors duration-200 hover:bg-[var(--pnp-dark-teal)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)]"
+                >
+                  View All Members
+                  <span aria-hidden="true">→</span>
+                </Link>
               </div>
             </article>
           </div>
