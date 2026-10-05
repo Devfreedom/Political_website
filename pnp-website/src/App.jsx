@@ -17,6 +17,7 @@ import VoterInfoPage from "./pages/public-pages/VoterInfoPage";
 import LoginPage from "./pages/public-pages/LoginPage";
 import NotFoundPage from "./pages/public-pages/NotFoundPage";
 import MemberDashboard from "./pages/member/MemberDashboard";
+import MemberMembership from "./pages/member/MemberMembership";
 import MemberPlaceholder from "./pages/member/MemberPlaceholder";
 import ComingSoon from "./componentss/ComingSoon";
 
@@ -44,7 +45,7 @@ export default function App() {
       {/* Member portal (Phase 1: shell + dashboard; children are placeholders) */}
       <Route path="/member" element={<MemberDashboard />} />
       <Route path="/member/profile" element={<MemberPlaceholder title="My Profile" />} />
-      <Route path="/member/membership" element={<MemberPlaceholder title="Membership" />} />
+      <Route path="/member/membership" element={<MemberMembership />} />
       <Route path="/member/organisation" element={<MemberPlaceholder title="My Organisation" />} />
       <Route path="/member/events" element={<MemberPlaceholder title="Events" />} />
       <Route path="/member/announcements" element={<MemberPlaceholder title="Announcements" />} />
