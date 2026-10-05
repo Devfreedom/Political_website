@@ -132,62 +132,6 @@ export default function JoinForm() {
     navigate("/member", { replace: true });
   };
 
-  if (submitted) {
-    return (
-      <section className="bg-[var(--pnp-white)]">
-        <div className="mx-auto max-w-2xl px-6 pb-24 pt-2 text-center lg:px-0 lg:pb-32">
-          <div className="rounded-md border border-[var(--pnp-gold)]/30 bg-[var(--pnp-gold)]/5 p-10">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              aria-hidden="true"
-              className="mx-auto text-[var(--pnp-gold)]"
-            >
-              <circle cx="20" cy="20" r="19" stroke="currentColor" strokeWidth="1.5" />
-              <path
-                d="m12 20 6 6 11-13"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <h2 className="mt-5 font-display text-3xl font-medium text-[var(--pnp-charcoal)]">
-              Welcome to PNP, {data.firstName}.
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-[15px] leading-7 text-[var(--pnp-slate)]">
-              Your membership registration has been received. A confirmation
-              has been queued for{" "}
-              <strong className="font-medium text-[var(--pnp-charcoal)]">
-                {data.email}
-              </strong>
-              . This is a prototype — no real membership has been created.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button href="/" variant="secondary" size="sm">
-                Back to home
-              </Button>
-              <Button
-                onClick={() => {
-                  setSubmitted(false);
-                  setStep(1);
-                  setData(initial);
-                }}
-                variant="primary"
-                size="sm"
-                trailingIcon={false}
-              >
-                Register another member
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="bg-[var(--pnp-white)]">
       <div className="mx-auto max-w-2xl px-6 pb-24 pt-2 lg:px-0 lg:pb-32">
@@ -228,7 +172,11 @@ export default function JoinForm() {
                 Step {step} of {STEPS.length}
               </span>
               <Button type="submit" variant="primary" size="md">
-                {step < STEPS.length ? "Continue" : "Submit membership"}
+                {step < STEPS.length
+                  ? "Continue"
+                  : submitting
+                    ? "Creating account…"
+                    : "Submit membership"}
               </Button>
             </div>
           </div>
@@ -411,6 +359,26 @@ function Step4({ data, update }) {
           )}
         </Field>
       </div>
+      <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <Field label="Password">
+          {(id) => (
+            <input id={id} type="password" value={data.password}
+              onChange={(e) => update({ password: e.target.value })}
+              autoComplete="new-password" placeholder="At least 8 characters" className={fieldClasses} />
+          )}
+        </Field>
+        <Field label="Confirm password">
+          {(id) => (
+            <input id={id} type="password" value={data.confirmPassword}
+              onChange={(e) => update({ confirmPassword: e.target.value })}
+              autoComplete="new-password" placeholder="Repeat your password" className={fieldClasses} />
+          )}
+        </Field>
+      </div>
+      <p className="mt-3 text-xs leading-6 text-[var(--pnp-slate)]/80">
+        Use at least 8 characters with a letter and a number. Demo prototype —
+        do not reuse a password you use elsewhere.
+      </p>
       <label className="mt-6 flex items-start gap-3 text-[14px] leading-6 text-[var(--pnp-slate)]">
         <input type="checkbox" checked={data.consent}
           onChange={(e) => update({ consent: e.target.checked })}
