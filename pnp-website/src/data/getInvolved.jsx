@@ -31,7 +31,7 @@ export const getInvolved = [
     title: "Register to Vote",
     body:
       "Make sure your voice is heard at every level of government. Update your voter registration, claim your PVC, and stay election-ready.",
-    cta: { label: "Get your PVC", href: "/register" },
+    cta: { label: "Voter information", href: "/voters" },
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
         <path

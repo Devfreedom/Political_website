@@ -9,7 +9,7 @@ export default function ManifestoPreview({ principles }) {
       <div className="lg:col-span-5">
         <figure className="relative border-l-2 border-[var(--pnp-gold)] pl-6">
           <blockquote className="font-display text-2xl leading-snug text-[var(--pnp-charcoal)] md:text-[28px] md:leading-[1.25]">
-            “Our manifesto is a covenant with the Nigerian people — a clear,
+            “Our manifesto is our commitment to Nigerians — a clear,
             accountable plan for an economy that works, a nation that holds
             together, and a democracy that listens.”
           </blockquote>
