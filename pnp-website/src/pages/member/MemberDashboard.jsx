@@ -5,11 +5,8 @@ import MemberSummaryCard from "../../componentss/member/MemberSummaryCard";
 import QuickAction from "../../componentss/member/QuickAction";
 import UpcomingEventCard from "../../componentss/member/UpcomingEventCard";
 import AnnouncementList from "../../componentss/member/AnnouncementList";
-import {
-  member,
-  memberUpcomingEvent,
-  memberAnnouncements,
-} from "../../data/member";
+import { useAuth } from "../../auth/AuthContext";
+import { memberUpcomingEvent, memberAnnouncements } from "../../data/member";
 
 const QUICK_ACTIONS = [
   {
@@ -36,13 +33,15 @@ const QUICK_ACTIONS = [
 
 /** Member dashboard — route /member. Functional overview, not editorial. */
 export default function MemberDashboard() {
+  const { currentUser } = useAuth();
+
   return (
     <MemberLayout>
-      <DashboardHeader firstName={member.firstName} />
+      <DashboardHeader firstName={currentUser.firstName} />
 
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[1.5fr,1fr]">
-        <MembershipStatusCard member={member} />
-        <MemberSummaryCard member={member} />
+        <MembershipStatusCard member={currentUser} />
+        <MemberSummaryCard member={currentUser} />
       </div>
 
       <section aria-label="Quick actions" className="mt-8">
