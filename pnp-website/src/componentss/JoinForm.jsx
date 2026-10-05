@@ -110,9 +110,26 @@ export default function JoinForm() {
     setStep((s) => Math.max(1, s - 1));
   };
 
-  const submit = () => {
+  const submit = async () => {
     setError("");
-    setSubmitted(true);
+    setSubmitting(true);
+    const result = await signup({
+      fullName: `${data.firstName.trim()} ${data.lastName.trim()}`.trim(),
+      email: data.email,
+      phone: data.phone,
+      state: data.state,
+      lga: data.lga,
+      ward: data.ward,
+      password: data.password,
+    });
+    setSubmitting(false);
+    if (!result.ok && result.error === "duplicate") {
+      setError(
+        "An account with this email already exists. Please sign in instead."
+      );
+      return;
+    }
+    navigate("/member", { replace: true });
   };
 
   if (submitted) {
