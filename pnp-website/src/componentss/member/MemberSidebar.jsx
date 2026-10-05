@@ -43,6 +43,33 @@ function NavItems({ onNavigate }) {
  * controlled by MemberLayout. No duplicated nav markup.
  */
 export default function MemberSidebar({ open, onClose }) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    if (onClose) onClose();
+    navigate("/", { replace: true });
+  };
+
+  const utility = (
+    <>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="flex w-full items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-white/70 transition-colors duration-150 hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)]"
+      >
+        <span aria-hidden="true">→</span> Logout
+      </button>
+      <Link
+        to="/"
+        className="flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-white/70 transition-colors duration-150 hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)]"
+      >
+        <span aria-hidden="true">←</span> Back to Public Website
+      </Link>
+    </>
+  );
+
   return (
     <>
       {/* Desktop sidebar */}
@@ -63,12 +90,7 @@ export default function MemberSidebar({ open, onClose }) {
           <NavItems />
         </nav>
         <div className="border-t border-white/10 p-4">
-          <Link
-            to="/"
-            className="flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-white/70 transition-colors duration-150 hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)]"
-          >
-            <span aria-hidden="true">←</span> Back to Public Website
-          </Link>
+          {utility}
         </div>
       </aside>
 
