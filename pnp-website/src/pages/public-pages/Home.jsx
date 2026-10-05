@@ -162,6 +162,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* NIGERIA IN FOCUS — people-first storytelling (no photography yet) */}
+      <CommunityStories />
+
       {/* 7. LEADERSHIP ----------------------------------------------- */}
       <section
         id="leadership"
@@ -262,6 +265,50 @@ export default function Home() {
               <EventCard key={e.title} {...e} />
             ))}
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* WARD + VOTER — grassroots discovery and civic information */}
+      <section
+        aria-labelledby="ward-voter-heading"
+        className="border-t border-[var(--pnp-charcoal)]/10 bg-white"
+      >
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <SectionHeading
+            eyebrow="Your ward, your vote"
+            title={
+              <span id="ward-voter-heading">
+                Start where you live.
+              </span>
+            }
+            intro="Find your ward, get election-ready, and show up. No accounts, no databases — just clear next steps."
+          />
+          <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr,1fr] lg:gap-8">
+            <WardFinder compact />
+            <div className="flex flex-col justify-between gap-6 rounded-md border border-[var(--pnp-charcoal)]/10 bg-[var(--pnp-dark-teal)]/5 p-8">
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[var(--pnp-dark-teal)]">
+                  Voter information
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-medium leading-tight text-[var(--pnp-charcoal)]">
+                  Registered? Have your PVC?
+                </h3>
+                <p className="mt-3 text-[15px] leading-7 text-[var(--pnp-slate)]">
+                  Registration and PVC collection are handled by INEC. Our
+                  voter page explains the basics and links to official
+                  resources only.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Button href="/voters" variant="dark" size="md">
+                  Voter information
+                </Button>
+                <Button href="/events" variant="secondary" size="md">
+                  Meet us in your state
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
