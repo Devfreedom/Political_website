@@ -3,7 +3,7 @@ import MemberLayout from "../../componentss/member/MemberLayout";
 import MembershipStatusCard from "../../componentss/member/MembershipStatusCard";
 import MembershipCard from "../../componentss/member/MembershipCard";
 import QuickAction from "../../componentss/member/QuickAction";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 
 const ACTIONS = [
   {

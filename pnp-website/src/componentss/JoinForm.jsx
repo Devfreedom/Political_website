@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/useAuth";
 
 /**
  * JoinForm — frontend-only membership registration prototype.

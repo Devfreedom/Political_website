@@ -1,4 +1,5 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { AuthContext } from "./context";
 import {
   ensureSeed,
   createUser,
@@ -9,10 +10,6 @@ import {
   clearSession,
   getUsers,
 } from "./store";
-
-const AuthContext = createContext(null);
-
-export { AuthContext };
 
 /**
  * AuthProvider — centralized demo auth state (frontend prototype only).

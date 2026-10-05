@@ -5,7 +5,7 @@ import MemberSummaryCard from "../../componentss/member/MemberSummaryCard";
 import QuickAction from "../../componentss/member/QuickAction";
 import UpcomingEventCard from "../../componentss/member/UpcomingEventCard";
 import AnnouncementList from "../../componentss/member/AnnouncementList";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 import { memberUpcomingEvent, memberAnnouncements } from "../../data/member";
 
 const QUICK_ACTIONS = [

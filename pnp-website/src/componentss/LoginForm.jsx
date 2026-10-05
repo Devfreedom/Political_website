@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Button from "./Button";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/useAuth";
 import { DEMO_EMAIL, DEMO_PASSWORD } from "../auth/store";
 
 /**

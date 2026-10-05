@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import MemberLayout from "../../componentss/member/MemberLayout";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 
 const inputClasses =
   "w-full rounded-md border border-[var(--pnp-charcoal)]/15 bg-white px-4 py-3 text-sm text-[var(--pnp-charcoal)] outline-none transition-colors focus:border-[var(--pnp-gold)]";
