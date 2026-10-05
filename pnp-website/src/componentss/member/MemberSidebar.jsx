@@ -136,12 +136,7 @@ export default function MemberSidebar({ open, onClose }) {
           <NavItems onNavigate={onClose} />
         </nav>
         <div className="border-t border-white/10 p-4">
-          <Link
-            to="/"
-            className="flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)]"
-          >
-            <span aria-hidden="true">←</span> Back to Public Website
-          </Link>
+          {utility}
         </div>
       </aside>
     </>
