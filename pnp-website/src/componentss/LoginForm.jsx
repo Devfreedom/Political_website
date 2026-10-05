@@ -1,90 +1,54 @@
 import { useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useAuth } from "../auth/AuthContext";
+import { DEMO_EMAIL, DEMO_PASSWORD } from "../auth/store";
 
 /**
- * LoginForm — frontend-only member login prototype.
- * Validates email format on submit; on "success" shows an inline notice.
+ * LoginForm — demo login against the frontend prototype member store.
+ * Frontend-only prototype — credentials are not verified by any server.
  */
 export default function LoginForm() {
   const emailId = useId();
   const passwordId = useId();
-  const emailErrorId = useId();
+  const errorId = useId();
+  const { login, isAuthenticated, ready } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const onSubmit = (e) => {
+  if (ready && isAuthenticated) {
+    return <Navigate to="/member" replace />;
+  }
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setError("Please enter a valid email address.");
-      setStatus("error");
       return;
     }
     if (!password) {
       setError("Please enter your password.");
-      setStatus("error");
       return;
     }
 
-    setStatus("submitting");
-    setTimeout(() => setStatus("success"), 600);
-  }
+    setSubmitting(true);
+    const result = await login(email, password);
+    setSubmitting(false);
 
-  if (status === "success") {
-    return (
-      <section className="bg-[var(--pnp-white)]">
-        <div className="mx-auto max-w-md px-6 pb-24 pt-2 text-center lg:px-0 lg:pb-32">
-          <div className="rounded-md border border-[var(--pnp-gold)]/30 bg-[var(--pnp-gold)]/5 p-8">
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 36 36"
-              fill="none"
-              aria-hidden="true"
-              className="mx-auto text-[var(--pnp-gold)]"
-            >
-              <circle cx="18" cy="18" r="17" stroke="currentColor" strokeWidth="1.5" />
-              <path
-                d="m11 18 5 5 9-10"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <h2 className="mt-4 font-display text-2xl font-medium text-[var(--pnp-charcoal)]">
-              Signed in.
-            </h2>
-            <p className="mt-2 text-[15px] leading-7 text-[var(--pnp-slate)]">
-              You're now signed in as{" "}
-              <strong className="font-medium text-[var(--pnp-charcoal)]">
-                {email}
-              </strong>
-              . This is a prototype — no real session has been created.
-            </p>
-            <div className="mt-6">
-              <Button
-                onClick={() => {
-                  setStatus("idle");
-                  setEmail("");
-                  setPassword("");
-                }}
-                variant="secondary"
-                size="sm"
-              >
-                Sign in as another user
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+    if (!result.ok) {
+      setError("Incorrect email or password. Check your details and try again.");
+      return;
+    }
+    const from = location.state?.from;
+    navigate(typeof from === "string" ? from : "/member", { replace: true });
+  };
 
   return (
     <section className="bg-[var(--pnp-white)]">
@@ -109,8 +73,6 @@ export default function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              aria-invalid={status === "error" && error.includes("email")}
-              aria-describedby={status === "error" ? emailErrorId : undefined}
               placeholder="you@example.com"
               className="rounded-md border border-[var(--pnp-charcoal)]/15 bg-white px-4 py-3 text-sm text-[var(--pnp-charcoal)] placeholder:text-[var(--pnp-slate)]/60 outline-none transition-colors focus:border-[var(--pnp-gold)]"
             />
@@ -131,19 +93,13 @@ export default function LoginForm() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              aria-invalid={status === "error" && error.includes("password")}
-              aria-describedby={status === "error" ? emailErrorId : undefined}
               placeholder="••••••••"
               className="rounded-md border border-[var(--pnp-charcoal)]/15 bg-white px-4 py-3 text-sm text-[var(--pnp-charcoal)] placeholder:text-[var(--pnp-slate)]/40 outline-none transition-colors focus:border-[var(--pnp-gold)]"
             />
           </div>
 
-          {status === "error" && error && (
-            <p
-              id={emailErrorId}
-              role="alert"
-              className="mt-4 text-sm text-[#B23A48]"
-            >
+          {error && (
+            <p id={errorId} role="alert" className="mt-4 text-sm text-[#B23A48]">
               {error}
             </p>
           )}
@@ -156,11 +112,26 @@ export default function LoginForm() {
               className="w-full justify-center"
               trailingIcon={false}
             >
-              {status === "submitting" ? "Signing in…" : "Sign in"}
+              {submitting ? "Signing in…" : "Sign in"}
             </Button>
           </div>
 
-          <p className="mt-6 text-center text-xs text-[var(--pnp-slate)]">
+          <p
+            role="note"
+            className="mt-6 rounded-md bg-[var(--pnp-dark-teal)]/5 px-4 py-3 text-center text-xs leading-6 text-[var(--pnp-slate)]"
+          >
+            Frontend-only prototype — credentials are not verified by any
+            server. Demo account:{" "}
+            <strong className="font-semibold text-[var(--pnp-charcoal)]">
+              {DEMO_EMAIL}
+            </strong>{" "}
+            /{" "}
+            <strong className="font-semibold text-[var(--pnp-charcoal)]">
+              {DEMO_PASSWORD}
+            </strong>
+          </p>
+
+          <p className="mt-4 text-center text-xs text-[var(--pnp-slate)]">
             Forgot your password?{" "}
             <Link
               to="/password-reset"
