@@ -1,7 +1,9 @@
 import PageLayout from "../../componentss/PageLayout";
 import PageHero from "../../componentss/PageHero";
 import StructureSection from "../../componentss/StructureSection";
+import WardFinder from "../../componentss/WardFinder";
 import ScrollReveal from "../../componentss/ScrollReveal";
+import Button from "../../componentss/Button";
 
 export default function StructurePage() {
   return (
