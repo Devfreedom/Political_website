@@ -7,6 +7,8 @@ import { news } from "./news";
  * member identity, next event and announcements; import from here
  * rather than hardcoding values in JSX.
  */
+export const MEMBERSHIP_STATUSES = ["Active", "Pending", "Suspended", "Expired"];
+
 export const member = {
   id: "PNP-000124",
   firstName: "Amina",
@@ -15,6 +17,7 @@ export const member = {
   email: "amina.musa@example.com",
   phone: "+234 803 000 0124",
   membershipStatus: "ACTIVE",
+  membershipType: "Full Member",
   state: "Plateau",
   lga: "Mangu",
   ward: "Ward 08",
