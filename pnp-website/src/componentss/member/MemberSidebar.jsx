@@ -1,39 +1,64 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { MEMBER_NAV } from "./memberNav";
+import { MEMBER_NAV, MEMBER_NAV_SOON } from "./memberNav";
 import { useAuth } from "../../auth/useAuth";
+
+function NavLinkRow({ item, onNavigate, soon }) {
+  return (
+    <NavLink
+      to={item.to}
+      end={item.end}
+      onClick={onNavigate}
+      className={({ isActive }) =>
+        `flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)] ${
+          isActive
+            ? "bg-white/10 text-white"
+            : "text-white/70 hover:bg-white/5 hover:text-white"
+        }`
+      }
+    >
+      {({ isActive }) => (
+        <>
+          <span
+            aria-hidden="true"
+            className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+              isActive ? "bg-[var(--pnp-gold)]" : "bg-white/25"
+            }`}
+          />
+          <span className="flex-1">{item.label}</span>
+          {soon && (
+            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white/60">
+              Soon
+            </span>
+          )}
+        </>
+      )}
+    </NavLink>
+  );
+}
 
 function NavItems({ onNavigate }) {
   return (
-    <ul className="flex flex-col gap-1">
-      {MEMBER_NAV.map((item) => (
-        <li key={item.to}>
-          <NavLink
-            to={item.to}
-            end={item.end}
-            onClick={onNavigate}
-            className={({ isActive }) =>
-              `flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)] ${
-                isActive
-                  ? "bg-white/10 text-white"
-                  : "text-white/70 hover:bg-white/5 hover:text-white"
-              }`
-            }
-          >
-            {({ isActive }) => (
-              <>
-                <span
-                  aria-hidden="true"
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    isActive ? "bg-[var(--pnp-gold)]" : "bg-white/25"
-                  }`}
-                />
-                {item.label}
-              </>
-            )}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
+    <div className="flex flex-col gap-5">
+      <ul className="flex flex-col gap-1">
+        {MEMBER_NAV.map((item) => (
+          <li key={item.to}>
+            <NavLinkRow item={item} onNavigate={onNavigate} />
+          </li>
+        ))}
+      </ul>
+      <div>
+        <p className="px-4 pb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-white/40">
+          Coming soon
+        </p>
+        <ul className="flex flex-col gap-1">
+          {MEMBER_NAV_SOON.map((item) => (
+            <li key={item.to}>
+              <NavLinkRow item={item} onNavigate={onNavigate} soon />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
