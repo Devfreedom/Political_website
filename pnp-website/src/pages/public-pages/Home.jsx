@@ -105,11 +105,11 @@ export default function Home() {
               eyebrow="The Manifesto"
               title={
                 <span id="manifesto-heading">
-                  A covenant with the
-                  <br className="hidden md:block" /> Nigerian people.
+                  Our commitment
+                  <br className="hidden md:block" /> to Nigerians.
                 </span>
               }
-              intro="Our 2026 manifesto sets out clear principles — not vague aspirations. Below is a preview; the full document details our policy commitments across every sector."
+              intro="Our 2026 manifesto sets out what we will work to change — in plain language, sector by sector. Below is a preview of its core principles."
             />
 
             <ScrollReveal as="div" className="mt-14">
@@ -145,7 +145,7 @@ export default function Home() {
                   <br className="hidden md:block" /> not the top down.
                 </span>
               }
-              intro="PNP is organised as a clear institutional hierarchy from the National Executive to every registered member. Our mandate flows upward from citizens — and accountability flows downward."
+              intro="PNP starts in your ward. Our mandate flows upward from citizens — and accountability flows downward."
             />
             <ScrollReveal as="div">
               <StructureSection />
