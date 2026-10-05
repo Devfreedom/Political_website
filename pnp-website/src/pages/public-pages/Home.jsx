@@ -318,6 +318,34 @@ export default function Home() {
       {/* GET INVOLVED -------------------------------------------- */}
       <GetInvolved items={getInvolved} />
 
+      {/* PARTICIPATION STEPS — clear hierarchy, existing routes only */}
+      <section aria-label="Ways to take part" className="bg-[var(--pnp-white)]">
+        <div className="mx-auto max-w-7xl px-6 pb-20 lg:px-10 lg:pb-28">
+          <ol className="grid grid-cols-1 gap-4 rounded-md border border-[var(--pnp-charcoal)]/10 bg-white p-6 sm:grid-cols-2 md:p-8 lg:grid-cols-4">
+            {[
+              ["01 — Join", "Membership is free.", "/join"],
+              ["02 — Find your ward", "Start where you live.", "/chapters"],
+              ["03 — Get election-ready", "Registration + PVC.", "/voters"],
+              ["04 — Show up", "Events and volunteering.", "/events"],
+            ].map(([label, sub, href]) => (
+              <li key={href}>
+                <Link
+                  to={href}
+                  className="group flex flex-col gap-1 rounded-md px-4 py-3 transition-colors duration-200 hover:bg-[var(--pnp-dark-teal)]/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--pnp-gold)]"
+                >
+                  <span className="text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--pnp-dark-teal)] group-hover:underline">
+                    {label} →
+                  </span>
+                  <span className="text-[14px] leading-6 text-[var(--pnp-slate)]">
+                    {sub}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* 10. JOIN PNP CTA ------------------------------------------- */}
       <section
         id="join"
