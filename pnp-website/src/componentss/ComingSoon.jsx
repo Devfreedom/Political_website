@@ -7,7 +7,7 @@ import Button from "./Button";
  */
 export default function ComingSoon({ title, description }) {
   return (
-    <section className="bg-[var(--pnp-white)]">
+    <section className="bg-(--pnp-white)">
       <div className="mx-auto max-w-3xl px-6 py-24 text-center lg:px-10 lg:py-32">
         <span className="inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.32em] uppercase text-[var(--pnp-gold)]">
           <span className="h-px w-8 bg-current opacity-80" aria-hidden="true" />

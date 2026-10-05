@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
-/**
- * EventCard — upcoming event with date block, location and title.
- */
+
 export default function EventCard({ day, month, title, location, time, slug }) {
   return (
     <article className="group flex flex-col gap-5 border-t border-[var(--pnp-charcoal)]/10 py-7 sm:flex-row sm:items-center sm:gap-6">
