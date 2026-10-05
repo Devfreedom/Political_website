@@ -163,12 +163,12 @@ export default function MemberProfile() {
         >
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {[
-              ["fullName", "Full name", "text", "Amina Y. Musa"],
+              ["fullName", "Full name", "text", "e.g. Ada Bello"],
               ["email", "Email", "email", "you@example.com"],
               ["phone", "Phone", "tel", "+234 …"],
-              ["state", "State", "text", "Plateau"],
-              ["lga", "LGA", "text", "Mangu"],
-              ["ward", "Ward", "text", "Ward 08"],
+              ["state", "State", "text", "e.g. Lagos"],
+              ["lga", "LGA", "text", "e.g. Ikeja"],
+              ["ward", "Ward", "text", "e.g. Ward 04"],
             ].map(([key, label, type, placeholder]) => (
               <div key={key} className="flex flex-col gap-2">
                 <label htmlFor={`profile-${key}`} className={labelClasses}>
