@@ -1,7 +1,7 @@
 /** MembershipStatusCard — answers "Is my membership active? Where do I belong?" */
 export default function MembershipStatusCard({ member }) {
   const rows = [
-    ["Member ID", member.id],
+    ["Member ID", member.memberId],
     ["State", member.state],
     ["LGA", member.lga],
     ["Ward", member.ward],

@@ -52,7 +52,7 @@ export default function MembershipCard({ member }) {
           {member.fullName}
         </p>
         <p className="mt-1 text-sm font-semibold tracking-[0.14em] text-white/70">
-          {member.id}
+          {member.memberId}
         </p>
 
         <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-white/15 pt-5">
