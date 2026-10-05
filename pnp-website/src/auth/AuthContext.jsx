@@ -15,6 +15,17 @@ import {
  * AuthProvider — centralized demo auth state (frontend prototype only).
  * Exposes currentUser / isAuthenticated / login / signup / logout /
  * updateProfile. Session persists via localStorage; passwords never do.
+ *
+ * PRODUCTION AUTH REQUIREMENTS (do not launch without these):
+ * - server-side password hashing with a slow KDF (bcrypt/argon2), never
+ *   client-side digests and never plaintext anywhere
+ * - secure session management (httpOnly, Secure, SameSite cookies)
+ * - server-side authorization checks on every member route and API call
+ * - database persistence with backups, replacing src/auth/store.js entirely
+ * - account recovery and email verification flows
+ * - rate limiting and brute-force protection on login/signup
+ * UI code consumes only the public user shape, so the store can be
+ * swapped for API calls without rewriting components.
  */
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);

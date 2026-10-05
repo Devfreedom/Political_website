@@ -19,6 +19,7 @@ const FOOTER_LINKS = {
   ],
   Resources: [
     { label: "Structure", to: "/structure" },
+    { label: "Privacy", to: "/privacy" },
   ],
 };
 

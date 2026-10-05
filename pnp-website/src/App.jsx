@@ -23,11 +23,13 @@ import MemberProfile from "./pages/member/MemberProfile";
 import MemberPlaceholder from "./pages/member/MemberPlaceholder";
 import { AuthProvider } from "./auth/AuthContext";
 import RequireAuth from "./auth/RequireAuth";
+import ErrorBoundary from "./componentss/ErrorBoundary";
 import ComingSoon from "./componentss/ComingSoon";
 
 export default function App() {
   return (
     <AuthProvider>
+    <ErrorBoundary>
     <Routes>
       <Route path="/" element={<Home />} />
 
@@ -109,6 +111,7 @@ export default function App() {
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    </ErrorBoundary>
     </AuthProvider>
   );
 }
