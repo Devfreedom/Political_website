@@ -16,6 +16,8 @@ import ChaptersPage from "./pages/public-pages/ChaptersPage";
 import VoterInfoPage from "./pages/public-pages/VoterInfoPage";
 import LoginPage from "./pages/public-pages/LoginPage";
 import NotFoundPage from "./pages/public-pages/NotFoundPage";
+import MemberDashboard from "./pages/member/MemberDashboard";
+import MemberPlaceholder from "./pages/member/MemberPlaceholder";
 import ComingSoon from "./componentss/ComingSoon";
 
 export default function App() {
@@ -38,6 +40,18 @@ export default function App() {
       <Route path="/chapters" element={<ChaptersPage />} />
       <Route path="/voters" element={<VoterInfoPage />} />
       <Route path="/login" element={<LoginPage />} />
+
+      {/* Member portal (Phase 1: shell + dashboard; children are placeholders) */}
+      <Route path="/member" element={<MemberDashboard />} />
+      <Route path="/member/profile" element={<MemberPlaceholder title="My Profile" />} />
+      <Route path="/member/membership" element={<MemberPlaceholder title="Membership" />} />
+      <Route path="/member/organisation" element={<MemberPlaceholder title="My Organisation" />} />
+      <Route path="/member/events" element={<MemberPlaceholder title="Events" />} />
+      <Route path="/member/announcements" element={<MemberPlaceholder title="Announcements" />} />
+      <Route path="/member/volunteer" element={<MemberPlaceholder title="Volunteer" />} />
+      <Route path="/member/documents" element={<MemberPlaceholder title="Documents" />} />
+      <Route path="/member/messages" element={<MemberPlaceholder title="Messages" />} />
+      <Route path="/member/settings" element={<MemberPlaceholder title="Settings" />} />
 
       {/* Placeholder routes — share the ComingSoon component with bespoke copy */}
       <Route
