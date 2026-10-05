@@ -12,6 +12,8 @@ import NewsDetailPage from "./pages/public-pages/NewsDetailPage";
 import EventsPage from "./pages/public-pages/EventsPage";
 import EventDetailPage from "./pages/public-pages/EventDetailPage";
 import JoinPage from "./pages/public-pages/JoinPage";
+import ChaptersPage from "./pages/public-pages/ChaptersPage";
+import VoterInfoPage from "./pages/public-pages/VoterInfoPage";
 import LoginPage from "./pages/public-pages/LoginPage";
 import NotFoundPage from "./pages/public-pages/NotFoundPage";
 import ComingSoon from "./componentss/ComingSoon";
@@ -33,6 +35,8 @@ export default function App() {
       <Route path="/events" element={<EventsPage />} />
       <Route path="/events/:slug" element={<EventDetailPage />} />
       <Route path="/join" element={<JoinPage />} />
+      <Route path="/chapters" element={<ChaptersPage />} />
+      <Route path="/voters" element={<VoterInfoPage />} />
       <Route path="/login" element={<LoginPage />} />
 
       {/* Placeholder routes — share the ComingSoon component with bespoke copy */}
